@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+video {
+  display: block;
+}
+
+html {
+  height: 100vh;
+}
+
+.loading-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.loading-page h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.content {
+  display: none;
+}
+
+video {
+  width: 100vw;
+  height: auto;
+}
