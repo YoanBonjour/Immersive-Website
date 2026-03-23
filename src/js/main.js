@@ -41,16 +41,27 @@ const loupe = document.getElementById("loupe");
 const landscapeImg = document.querySelector(".image-container img:first-child");
 const landscape2Img = document.getElementById("landscape-2");
 
+// Toggle de la loupe au clic
 landscapeImg.addEventListener("click", function () {
   console.log("Loupe clicked");
+
   gsap.to("#loupe", {
-    width: 2000,
-    height: 2000,
+    scale: 10, // 200px * 10 = 2000px
     duration: 1,
     ease: "easeInOut",
   });
+  console.log("Loupe clicked");
+  setTimeout(() => {
+    gsap.to("#loupe", {
+      scale: 1, // Retour à la taille normale
+      duration: 1,
+      ease: "easeInOut",
+    });
+    console.log("Loupe unclicked");
+  }, 2000);
 });
 
+// Effet de loupe au survol
 if (landscapeImg && landscape2Img) {
   landscapeImg.addEventListener("mousemove", function (event) {
     const rect = landscapeImg.getBoundingClientRect();
@@ -58,8 +69,8 @@ if (landscapeImg && landscape2Img) {
     const y = event.clientY - rect.top;
 
     loupe.style.display = "block";
-    loupe.style.left = event.pageX - 100 + "px";
-    loupe.style.top = event.pageY - 100 + "px";
+    loupe.style.left = event.pageX - 106 + "px";
+    loupe.style.top = event.pageY - 106 + "px";
     loupe.style.backgroundSize = rect.width * zoom + "px auto";
     loupe.style.backgroundPosition =
       -x * zoom + 100 + "px " + (-y * zoom + 100) + "px";
