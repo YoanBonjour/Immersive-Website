@@ -48,7 +48,8 @@ html {
 }
 
 #landscape-2 {
-  position: absolute;
+  position: relative;
+  display: none;
   top: 0;
   left: 0;
   width: 100%;
@@ -68,7 +69,7 @@ html {
   height: 200px;
   border: solid 6px #fff;
   border-radius: 50%;
-  position: fixed;
+  position: absolute;
   pointer-events: none;
   background-image: url("../images/landscape-2.png");
   background-repeat: no-repeat;
