@@ -216,8 +216,8 @@ gsap.to(hint, { opacity: 0, delay: 3, duration: 1 });
   "use strict";
 
   /* ---- CONFIG : ajustez les seuils de vitesse ---- */
-  const SPEED_HAPPY = 3; // en dessous → content
-  const SPEED_ANNOYED = 8; // en dessous → agacé
+  const SPEED_HAPPY = 6; // en dessous → content
+  const SPEED_ANNOYED = 11; // en dessous → agacé
   const SPEED_ANGRY = 16; // au-dessus  → en colère
 
   const COLOR_SKIN_CALM = "#FAC775";

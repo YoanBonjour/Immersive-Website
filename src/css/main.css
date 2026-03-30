@@ -188,7 +188,6 @@ html {
     background 0.4s,
     color 0.4s;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 #sb-label.visible {
@@ -214,7 +213,6 @@ html {
   height: 80px;
   display: block;
   will-change: transform;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 }
 
 @keyframes sb-shake {
