@@ -17,7 +17,8 @@ html {
   height: 100vh;
 }
 
-.loading-page {
+.loading-page,
+.loading-page2 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +27,8 @@ html {
   text-align: center;
 }
 
-.loading-page h2 {
+.loading-page h2,
+.loading-page2 h2 {
   font-size: 2rem;
   color: #333;
 }

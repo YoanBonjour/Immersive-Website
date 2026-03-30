@@ -3,11 +3,14 @@ import { gsap } from "gsap";
 
 // Chargement de la page
 var loadingPage = document.querySelector(".loading-page");
+var loadingPage2 = document.querySelector(".loading-page2");
 var content = document.querySelector(".content");
 
+loadingPage2.style.opacity = 0;
 loadingPage.style.opacity = 0;
 content.style.opacity = 0;
 content.style.display = "none";
+loadingPage2.style.display = "none";
 
 // Start loading animation immediately
 gsap.to(loadingPage, { opacity: 1, duration: 2 });
@@ -29,9 +32,32 @@ Promise.all([loadPromise, timerPromise]).then(() => {
     duration: 0.5,
     onComplete: () => {
       loadingPage.style.display = "none";
+      loadingPage2.style.display = "block";
       content.style.display = "block";
-      gsap.to(content, { opacity: 1, duration: 0.5 });
+      gsap.to(loadingPage2, { opacity: 1, duration: 0.5 });
     },
+  });
+  gsap.to(content, {
+    opacity: 0,
+    duration: 0.5,
+  });
+  var timer2Promise = new Promise((resolve) => {
+    setTimeout(resolve, 2000);
+  });
+  Promise.all([timer2Promise]).then(() => {
+    gsap.to(loadingPage2, {
+      opacity: 0,
+      duration: 0.5,
+      onComplete: () => {
+        loadingPage2.style.display = "none";
+        content.style.display = "block";
+        gsap.to(content, { opacity: 1, duration: 0.5 });
+      },
+    });
+    gsap.to(content, {
+      opacity: 0,
+      duration: 0.5,
+    });
   });
 });
 
