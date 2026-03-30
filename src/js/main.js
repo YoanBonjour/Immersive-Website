@@ -32,7 +32,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
     duration: 0.5,
     onComplete: () => {
       loadingPage.style.display = "none";
-      loadingPage2.style.display = "block";
+      loadingPage2.style.display = "flex";
       content.style.display = "block";
       gsap.to(loadingPage2, { opacity: 1, duration: 0.5 });
     },
