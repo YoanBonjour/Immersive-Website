@@ -156,3 +156,86 @@ html {
   color: rgba(255, 220, 150, 0.95);
   background: rgba(255, 220, 150, 0.06);
 }
+
+#scroll-buddy {
+  position: fixed;
+  bottom: 0;
+  right: 2rem; /* ← changez ici pour repositionner */
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+#sb-label {
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 5px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    background 0.4s,
+    color 0.4s;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+#sb-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#sb-label.idle {
+  color: #7a7060;
+}
+#sb-label.happy {
+  color: #2d6016;
+}
+#sb-label.annoyed {
+  color: #7a4200;
+}
+#sb-label.angry {
+  color: #8b1a1a;
+}
+
+#sb-svg {
+  width: 80px;
+  height: 80px;
+  display: block;
+  will-change: transform;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes sb-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-3px);
+  }
+  40% {
+    transform: translateX(3px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+#sb-svg.shaking {
+  animation: sb-shake 0.35s ease-in-out infinite;
+}
