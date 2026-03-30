@@ -152,7 +152,7 @@ html {
 }
 
 #flipbtn:hover {
-  border-color: rgba(255, 220, 150, 0.55);
+  border-color: rgba(255, 220, 150, 0.533);
   color: rgba(255, 220, 150, 0.95);
   background: rgba(255, 220, 150, 0.06);
 }
