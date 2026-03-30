@@ -1,5 +1,7 @@
 // gasp
 import { gsap } from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 // Chargement de la page
 var loadingPage = document.querySelector(".loading-page");
@@ -97,6 +99,7 @@ if (landscapeImg && landscape2Img) {
   landscape2Img.addEventListener("mouseleave", hideLoupe);
 }
 
+// Carte 3d
 const card = document.getElementById("card");
 const wrap = document.getElementById("wrap");
 const btn = document.getElementById("flipbtn");
@@ -205,3 +208,22 @@ window.addEventListener(
 window.addEventListener("touchend", onUp);
 
 gsap.to(hint, { opacity: 0, delay: 3, duration: 1 });
+
+// Animation qui sort de l'enveloppe
+const EnveloppeTop = document.getElementById("enveloppe-top");
+const EnveloppeBottom = document.getElementById("enveloppe-bottom");
+const CardAnim = document.querySelector("cards");
+
+const scrollTriggerFunc = () => {
+  if (document.querySelector(".content")) {
+    gsap.to(EnveloppeTop, {
+      rotate: -100,
+      duration: 10,
+      scrollTrigger: {
+        trigger: ".cards",
+        start: "bottom bottom",
+        markers: true,
+      },
+    });
+  }
+};
