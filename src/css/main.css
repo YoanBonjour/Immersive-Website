@@ -177,3 +177,7 @@ html {
   display: flex;
   justify-content: end;
 }
+
+.content {
+  height: 2000px;
+}
