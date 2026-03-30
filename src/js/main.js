@@ -224,7 +224,6 @@ gsap.to(hint, { opacity: 0, delay: 3, duration: 1 });
   const COLOR_BLUSH = "#F09595";
   const COLOR_SWEAT = "#85B7EB";
   const COLOR_ANGER_STAR = "#E24B4A";
-  /* ------------------------------------------------ */
 
   const wrap = document.getElementById("scroll-buddy");
   if (!wrap) return;
