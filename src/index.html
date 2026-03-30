@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <title>Wait and see</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   </head>
   <body>
     <!-- Page de chargement -->
@@ -23,6 +24,28 @@
           src="./images/landscape-2.png"
           alt="Landscape 2"
         />
+      </div>
+      <div id="wrap">
+        <div id="scene">
+          <div id="card">
+            <div class="face">
+              <img
+                id="img-recto"
+                src="./images/card-nausicaa-front.png"
+                alt="recto"
+              />
+            </div>
+            <div class="face back">
+              <img
+                id="img-verso"
+                src="./images/card-nausicaa-back.png"
+                alt="verso"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="hint">Glisser pour orienter · Cliquer pour retourner</div>
+        <button id="flipbtn">Retourner la carte</button>
       </div>
     </div>
     <script src="js/main.js" type="module"></script>
