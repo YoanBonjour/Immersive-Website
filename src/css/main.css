@@ -31,6 +31,7 @@ html {
 .loading-page2 h2 {
   font-size: 2rem;
   color: #333;
+  z-index: 10;
 }
 
 .content {
@@ -238,4 +239,48 @@ html {
 
 #sb-svg.shaking {
   animation: sb-shake 0.35s ease-in-out infinite;
+}
+
+.cloud-top-left {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  width: 200vh;
+  height: auto;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.cloud-top-right {
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  transform: translate(50%, -50%);
+  width: 200vh;
+  height: auto;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.cloud-bottom-left {
+  position: absolute;
+  bottom: 20%;
+  left: 20%;
+  transform: translate(-50%, 50%);
+  width: 200vh;
+  height: auto;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.cloud-bottom-right {
+  position: absolute;
+  bottom: 20%;
+  right: 20%;
+  transform: translate(50%, 50%);
+  width: 200vh;
+  height: auto;
+  opacity: 0.8;
+  z-index: 0;
 }
