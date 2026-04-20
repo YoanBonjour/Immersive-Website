@@ -6,6 +6,35 @@ var loadingPage = document.querySelector(".loading-page");
 var loadingPage2 = document.querySelector(".loading-page2");
 var content = document.querySelector(".content");
 
+const cloudClasses = [
+  "cloud-top-left",
+  "cloud-top-right",
+  "cloud-bottom-left",
+  "cloud-bottom-right",
+];
+
+function moveCloudsToCorners(container) {
+  cloudClasses.forEach((cloudClass) => {
+    const cloud = container.querySelector(`.${cloudClass}`);
+    if (!cloud) return;
+
+    const x = cloudClass.includes("right")
+      ? window.innerWidth * 0.55
+      : -window.innerWidth * 0.55;
+    const y = cloudClass.includes("bottom")
+      ? window.innerHeight * 0.5
+      : -window.innerHeight * 0.5;
+
+    gsap.to(cloud, {
+      x,
+      y,
+      opacity: 0,
+      duration: 4,
+      ease: "power2.inOut",
+    });
+  });
+}
+
 loadingPage2.style.opacity = 0;
 loadingPage.style.opacity = 0;
 content.style.opacity = 0;
@@ -13,7 +42,7 @@ content.style.display = "none";
 loadingPage2.style.display = "none";
 
 // Start loading animation immediately
-gsap.to(loadingPage, { opacity: 1, duration: 2 });
+gsap.to(loadingPage, { opacity: 1, duration: 4 });
 
 // Set up promises for load and minimum timer
 var loadPromise = new Promise((resolve) => {
@@ -22,7 +51,7 @@ var loadPromise = new Promise((resolve) => {
 });
 
 var timerPromise = new Promise((resolve) => {
-  setTimeout(resolve, 1000);
+  setTimeout(resolve, 5000);
 });
 
 // When both load and timer are done, transition
@@ -30,19 +59,27 @@ Promise.all([loadPromise, timerPromise]).then(() => {
   gsap.to(loadingPage, {
     opacity: 0,
     duration: 0.5,
+    delay: 0.2,
     onComplete: () => {
       loadingPage.style.display = "none";
       loadingPage2.style.display = "flex";
       content.style.display = "block";
-      gsap.to(loadingPage2, { opacity: 1, duration: 0.5 });
+      gsap.to(loadingPage2, { opacity: 1, duration: 3 });
+      var timercloudsPromise = new Promise((resolve) => {
+        setTimeout(resolve, 4000);
+      });
+      Promise.all([timercloudsPromise]).then(() => {
+        moveCloudsToCorners(loadingPage2);
+      });
     },
   });
+
   gsap.to(content, {
     opacity: 0,
-    duration: 0.5,
+    duration: 4,
   });
   var timer2Promise = new Promise((resolve) => {
-    setTimeout(resolve, 2000);
+    setTimeout(resolve, 7500);
   });
   Promise.all([timer2Promise]).then(() => {
     gsap.to(loadingPage2, {

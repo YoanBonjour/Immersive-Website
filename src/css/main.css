@@ -25,6 +25,14 @@ html {
   height: 100vh;
   background-color: #f0f0f0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-page img,
+.loading-page2 img {
+  position: absolute;
+  pointer-events: none;
 }
 
 .loading-page h2,
