@@ -17,8 +17,7 @@ html {
   height: 100vh;
 }
 
-.loading-page,
-.loading-page2 {
+.loading-page {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,16 +26,17 @@ html {
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-image: url("../images/desk.png");
+  background-size: cover;
+  background-position: center;
 }
 
-.loading-page img,
-.loading-page2 img {
+.loading-page img {
   position: absolute;
   pointer-events: none;
 }
 
-.loading-page h2,
-.loading-page2 h2 {
+.loading-page h2 {
   font-size: 3rem;
   color: #333;
   z-index: 10;
@@ -45,6 +45,17 @@ html {
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
+  animation: textFloat 3s ease-in-out infinite;
+}
+
+@keyframes textFloat {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-5px);
+  }
 }
 
 .second-title {
@@ -265,7 +276,7 @@ html {
   transform: translate(-50%, -50%);
   width: 250vh;
   height: auto;
-  opacity: 0.8;
+  opacity: 1;
   z-index: 0;
   animation: cloudFloatLeft 5s ease-in-out infinite;
 }
@@ -277,7 +288,7 @@ html {
   transform: translate(50%, -50%);
   width: 250vh;
   height: auto;
-  opacity: 0.8;
+  opacity: 1;
   z-index: 0;
   animation: cloudFloatRight 6s ease-in-out infinite;
 }
@@ -289,7 +300,7 @@ html {
   transform: translate(-50%, 50%);
   width: 200vh;
   height: auto;
-  opacity: 0.8;
+  opacity: 1;
   z-index: 1;
   animation: cloudFloatBottomLeft 5.5s ease-in-out infinite;
 }
@@ -301,7 +312,7 @@ html {
   transform: translate(50%, 50%);
   width: 200vh;
   height: auto;
-  opacity: 0.8;
+  opacity: 1;
   z-index: 0;
   animation: cloudFloatBottomRight 6.5s ease-in-out infinite;
 }
@@ -326,44 +337,36 @@ html {
 @keyframes cloudLeaveTopLeft {
   0% {
     transform: translate(-50%, -50%) translateY(0px);
-    opacity: 0.8;
   }
   100% {
     transform: translate(-150%, -150%) translateY(0px);
-    opacity: 0;
   }
 }
 
 @keyframes cloudLeaveTopRight {
   0% {
     transform: translate(50%, -50%) translateY(0px);
-    opacity: 0.8;
   }
   100% {
     transform: translate(150%, -150%) translateY(0px);
-    opacity: 0;
   }
 }
 
 @keyframes cloudLeaveBottomLeft {
   0% {
     transform: translate(-50%, 50%) translateY(0px);
-    opacity: 0.8;
   }
   100% {
     transform: translate(-150%, 150%) translateY(0px);
-    opacity: 0;
   }
 }
 
 @keyframes cloudLeaveBottomRight {
   0% {
     transform: translate(50%, 50%) translateY(0px);
-    opacity: 0.8;
   }
   100% {
     transform: translate(150%, 150%) translateY(0px);
-    opacity: 0;
   }
 }
 
@@ -405,4 +408,14 @@ html {
   50% {
     transform: translate(50%, 50%) translateY(-12px);
   }
+}
+
+.desk-2 {
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: auto;
+  z-index: 2;
 }

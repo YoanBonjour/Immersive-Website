@@ -48,31 +48,25 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
   // Move clouds
   var timerCloudsPromise = new Promise((resolve) => {
-    setTimeout(resolve, 7000);
+    setTimeout(resolve, 4000);
   });
   Promise.all([timerCloudsPromise]).then(() => {
     moveCloudsToCorners(loadingPage);
   });
 
   gsap.to(content, {
-    opacity: 0,
+    opacity: 1,
     duration: 4,
   });
   var timer2Promise = new Promise((resolve) => {
     setTimeout(resolve, 7500);
   });
   Promise.all([timer2Promise]).then(() => {
-    gsap.to(loadingPage, {
-      opacity: 0,
-      duration: 2,
-      onComplete: () => {
-        loadingPage.style.display = "none";
-        content.style.display = "block";
-        gsap.to(content, { opacity: 1, duration: 2 });
-      },
-    });
+    loadingPage.style.display = "none";
+    content.style.display = "block";
+    gsap.to(content, { opacity: 1, duration: 2 });
     gsap.to(content, {
-      opacity: 0,
+      opacity: 1,
       duration: 0.5,
     });
   });
