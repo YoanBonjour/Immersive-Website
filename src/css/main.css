@@ -18,7 +18,6 @@ html {
 }
 
 .undraggable {
-  user-drag: none;
   -webkit-user-select: none; /* Safari, Chrome */
   -webkit-user-drag: none;
   -khtml-user-select: none; /* Konqueror */
@@ -125,7 +124,7 @@ html {
 #scene {
   perspective: 1200px;
   width: 100%;
-  height: 100%;
+  height: 25vw;
 }
 
 #card {
@@ -162,6 +161,7 @@ html {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-family: sans-serif;
+  display: none;
 }
 
 #flipbtn {
@@ -346,32 +346,35 @@ html {
   transform: translate(-50%, -50%);
   width: 100%;
   z-index: 3;
-  display: none;
+  rotate: -9deg;
 }
 
 .open-enveloppe {
   z-index: 3;
   width: 90%;
-  transform: translate(-49%, -39%);
+  transform: translate(-48%, -39%);
+  rotate: -9deg;
 }
 
 .stamp {
   z-index: 4;
   width: 30%;
-  transform: translate(-50%, 20%);
+  transform: translate(-40%, 25%);
+  rotate: -9deg;
 }
 
 .background-enveloppe {
-  z-index: 2;
+  z-index: -1;
   width: 101%;
-  transform: translate(-50.5%, -39%);
+  transform: translate(-49%, -39%);
+  rotate: -9deg;
 }
 
 .enveloppe-container {
   position: absolute;
-  /* transform: translate(150%, -1400%); */
-  top: 10vw;
-  right: 7vw;
+  /* transform: translate(150%, -380%); */
+  top: 6.9vw;
+  right: 3vw;
   width: 30%;
   cursor: pointer;
   z-index: 3;
@@ -396,5 +399,13 @@ html {
 
 #card {
   width: 50%;
-  height: 40%;
+  height: 50%;
+}
+
+.scrollTriggerEnveloppe {
+  height: 200vh;
+}
+
+.scrollTriggerNext {
+  height: 100vh;
 }

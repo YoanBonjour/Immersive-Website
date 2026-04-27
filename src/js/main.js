@@ -1,5 +1,8 @@
 // gasp
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Chargement de la page
 var loadingPage = document.querySelector(".loading-page");
@@ -69,6 +72,88 @@ Promise.all([loadPromise, timerPromise]).then(() => {
       opacity: 1,
       duration: 0.5, // Affiche le contenu progressivement pendant que les nuages partent
     });
+
+    // Animation enveloppe au scroll + desk sticky
+    setTimeout(() => {
+      const enveloppeContainer = document.querySelector(".enveloppe-container");
+      const deskImg = document.querySelector(".desk-2");
+      const stampDelete = document.querySelector(".stamp");
+      const topenveloppeOpen = document.querySelector(".open-enveloppe");
+
+      if (enveloppeContainer && deskImg) {
+        // Animation enveloppe centrée
+        // gsap.to(enveloppeContainer, {
+        //   position: "fixed",
+        //   top: 0,
+        //   zIndex: 1,
+        //   scrollTrigger: {
+        //     trigger: ".content",
+        //     start: "top top",
+        //     end: "bottom top",
+        //     scrub: 0.5,
+        //     markers: false,
+        //   },
+        // });
+
+        gsap.to(enveloppeContainer, {
+          position: "fixed",
+          scale: 3,
+          rotation: 6,
+          left: "50%",
+          top: "50%",
+          xPercent: -50,
+          yPercent: -50,
+          right: "auto",
+          zIndex: 100,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "top top",
+            end: "bottom center",
+            scrub: 0.5,
+            markers: false,
+          },
+        });
+
+        gsap.to(stampDelete, {
+          opacity: 0,
+          duration: 0.5,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "1000px top",
+            end: "1500px top",
+            scrub: 0.5,
+            markers: false,
+          },
+        });
+
+        gsap.to(topenveloppeOpen, {
+          transform: "scaleY(-1)",
+          transformOrigin: "top ",
+          duration: 0.5,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "1500px top",
+            end: "2000px top",
+            scrub: 0.5,
+            markers: true,
+          },
+        });
+
+        // Animation desk sticky
+        gsap.to(deskImg, {
+          position: "fixed",
+          top: 0,
+          zIndex: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+            markers: false,
+          },
+        });
+      }
+    }, 500);
   });
 });
 
