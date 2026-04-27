@@ -128,7 +128,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
         gsap.to(topenveloppeOpen, {
           transform: "scaleY(-1)",
-          transformOrigin: "top ",
+
           duration: 0.5,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
