@@ -1,5 +1,8 @@
 // gasp
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Chargement de la page
 var loadingPage = document.querySelector(".loading-page");
@@ -69,6 +72,88 @@ Promise.all([loadPromise, timerPromise]).then(() => {
       opacity: 1,
       duration: 0.5, // Affiche le contenu progressivement pendant que les nuages partent
     });
+
+    // Animation enveloppe au scroll + desk sticky
+    setTimeout(() => {
+      const enveloppeContainer = document.querySelector(".enveloppe-container");
+      const deskImg = document.querySelector(".desk-2");
+      const stampDelete = document.querySelector(".stamp");
+      const topenveloppeOpen = document.querySelector(".open-enveloppe");
+
+      if (enveloppeContainer && deskImg) {
+        // Animation enveloppe centrée
+        // gsap.to(enveloppeContainer, {
+        //   position: "fixed",
+        //   top: 0,
+        //   zIndex: 1,
+        //   scrollTrigger: {
+        //     trigger: ".content",
+        //     start: "top top",
+        //     end: "bottom top",
+        //     scrub: 0.5,
+        //     markers: false,
+        //   },
+        // });
+
+        gsap.to(enveloppeContainer, {
+          position: "fixed",
+          scale: 3,
+          rotation: 6,
+          left: "50%",
+          top: "50%",
+          xPercent: -50,
+          yPercent: -50,
+          right: "auto",
+          zIndex: 100,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "top top",
+            end: "bottom center",
+            scrub: 0.5,
+            markers: false,
+          },
+        });
+
+        gsap.to(stampDelete, {
+          opacity: 0,
+          duration: 0.5,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "1000px top",
+            end: "1500px top",
+            scrub: 0.5,
+            markers: false,
+          },
+        });
+
+        gsap.to(topenveloppeOpen, {
+          transform: "scaleY(-1)",
+          transformOrigin: "top ",
+          duration: 0.5,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "1500px top",
+            end: "2000px top",
+            scrub: 0.5,
+            markers: true,
+          },
+        });
+
+        // Animation desk sticky
+        gsap.to(deskImg, {
+          position: "fixed",
+          top: 0,
+          zIndex: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+            markers: false,
+          },
+        });
+      }
+    }, 500);
   });
 });
 
@@ -314,199 +399,3 @@ window.addEventListener(
 window.addEventListener("touchend", onUp);
 
 gsap.to(hint, { opacity: 0, delay: 3, duration: 1 });
-
-// (function () {
-//   "use strict";
-
-//   /* ---- CONFIG : ajustez les seuils de vitesse ---- */
-//   const SPEED_HAPPY = 6; // en dessous → content
-//   const SPEED_ANNOYED = 11; // en dessous → agacé
-//   const SPEED_ANGRY = 16; // au-dessus  → en colère
-
-//   const COLOR_SKIN_CALM = "#FAC775";
-//   const COLOR_BLUSH = "#F09595";
-//   const COLOR_SWEAT = "#85B7EB";
-//   const COLOR_ANGER_STAR = "#E24B4A";
-
-//   const wrap = document.getElementById("scroll-buddy");
-//   if (!wrap) return;
-
-//   wrap.innerHTML = `
-//     <div id="sb-label" class="idle">😴 En attente…</div>
-//     <svg id="sb-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-//       <ellipse id="sb-body"    cx="40" cy="66" rx="16" ry="11" fill="${COLOR_SKIN_CALM}"/>
-//       <circle  id="sb-head"    cx="40" cy="36" r="20"  fill="${COLOR_SKIN_CALM}"/>
-//       <ellipse id="sb-eye-l"   cx="32" cy="32" rx="3.5" ry="3.5" fill="#2C2C2A"/>
-//       <ellipse id="sb-eye-r"   cx="48" cy="32" rx="3.5" ry="3.5" fill="#2C2C2A"/>
-//       <circle  id="sb-pupil-l" cx="33.2" cy="31.5" r="1.4" fill="white"/>
-//       <circle  id="sb-pupil-r" cx="49.2" cy="31.5" r="1.4" fill="white"/>
-//       <path    id="sb-brow-l"  d="M29 25 Q32 23 35 25" stroke="#2C2C2A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-//       <path    id="sb-brow-r"  d="M45 25 Q48 23 51 25" stroke="#2C2C2A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-//       <path    id="sb-mouth"   d="M33 42 Q40 48 47 42" stroke="#2C2C2A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-//       <ellipse id="sb-cheek-l" cx="25" cy="38" rx="4.5" ry="2.8" fill="${COLOR_BLUSH}" opacity="0.5"/>
-//       <ellipse id="sb-cheek-r" cx="55" cy="38" rx="4.5" ry="2.8" fill="${COLOR_BLUSH}" opacity="0.5"/>
-//       <path    id="sb-arm-l"   d="M24 60 Q13 55 15 44" stroke="${COLOR_SKIN_CALM}" stroke-width="5" fill="none" stroke-linecap="round"/>
-//       <path    id="sb-arm-r"   d="M56 60 Q67 55 65 44" stroke="${COLOR_SKIN_CALM}" stroke-width="5" fill="none" stroke-linecap="round"/>
-//       <ellipse id="sb-sweat"   cx="57" cy="23" rx="3" ry="4.5" fill="${COLOR_SWEAT}" opacity="0"/>
-//       <text    id="sb-star1"   x="10" y="22" font-size="11" fill="${COLOR_ANGER_STAR}" opacity="0">✦</text>
-//       <text    id="sb-star2"   x="60" y="18" font-size="9"  fill="${COLOR_ANGER_STAR}" opacity="0">✦</text>
-//     </svg>`;
-
-//   const svg = document.getElementById("sb-svg");
-//   const label = document.getElementById("sb-label");
-//   const head = document.getElementById("sb-head");
-//   const body_ = document.getElementById("sb-body");
-//   const eyeL = document.getElementById("sb-eye-l");
-//   const eyeR = document.getElementById("sb-eye-r");
-//   const pulL = document.getElementById("sb-pupil-l");
-//   const pulR = document.getElementById("sb-pupil-r");
-//   const browL = document.getElementById("sb-brow-l");
-//   const browR = document.getElementById("sb-brow-r");
-//   const mouth = document.getElementById("sb-mouth");
-//   const chkL = document.getElementById("sb-cheek-l");
-//   const chkR = document.getElementById("sb-cheek-r");
-//   const armL = document.getElementById("sb-arm-l");
-//   const armR = document.getElementById("sb-arm-r");
-//   const sweat = document.getElementById("sb-sweat");
-//   const star1 = document.getElementById("sb-star1");
-//   const star2 = document.getElementById("sb-star2");
-
-//   let lastScrollY = window.scrollY;
-//   let rawSpeed = 0;
-//   let smoothSpeed = 0;
-//   let angerLevel = 0;
-//   let bouncePhase = 0;
-//   let lastTime = performance.now();
-//   let currentMood = "";
-
-//   function lerp(a, b, t) {
-//     return a + (b - a) * t;
-//   }
-//   function clamp(v, lo, hi) {
-//     return Math.min(Math.max(v, lo), hi);
-//   }
-
-//   function lerpColor(t) {
-//     const h = lerp(40, 8, t);
-//     const s = lerp(90, 85, t);
-//     const l = lerp(63, 50, t);
-//     return `hsl(${h},${s}%,${l}%)`;
-//   }
-
-//   window.addEventListener(
-//     "scroll",
-//     function () {
-//       const now = performance.now();
-//       const dt = Math.max(now - lastTime, 16);
-//       rawSpeed = (Math.abs(window.scrollY - lastScrollY) / dt) * 16;
-//       lastScrollY = window.scrollY;
-//       lastTime = now;
-//     },
-//     { passive: true },
-//   );
-
-//   function frame(ts) {
-//     smoothSpeed = lerp(smoothSpeed, rawSpeed, 0.14);
-//     rawSpeed *= 0.8;
-
-//     let target;
-//     if (smoothSpeed < SPEED_HAPPY) target = smoothSpeed < 0.1 ? 0 : 1;
-//     else if (smoothSpeed < SPEED_ANNOYED) target = 1.8;
-//     else if (smoothSpeed < SPEED_ANGRY) target = 2.5;
-//     else target = 3;
-
-//     angerLevel = lerp(angerLevel, target, 0.09);
-
-//     const t1 = clamp(angerLevel / 1, 0, 1);
-//     const t2 = clamp((angerLevel - 1) / 1.5, 0, 1);
-//     const t3 = clamp((angerLevel - 2) / 1, 0, 1);
-
-//     const skinColor = lerpColor(t3 * 0.7 + t2 * 0.3);
-//     head.setAttribute("fill", skinColor);
-//     body_.setAttribute("fill", skinColor);
-//     armL.setAttribute("stroke", skinColor);
-//     armR.setAttribute("stroke", skinColor);
-
-//     bouncePhase += 0.1;
-//     const bounceAmt =
-//       angerLevel < 1.5
-//         ? Math.abs(Math.sin(bouncePhase)) * 3 * t1
-//         : Math.abs(Math.sin(bouncePhase * 1.4)) * 1.5;
-//     svg.style.transform = `translateY(${-bounceAmt}px)`;
-
-//     const shake = t3 > 0.1 ? Math.sin(ts * 0.03) * t3 * 5 : 0;
-
-//     const bLy0 = lerp(25, 22, t2);
-//     const bLy1 = lerp(23, 28, t2);
-//     const bLy2 = lerp(25, 22, t2);
-//     browL.setAttribute(
-//       "d",
-//       `M${29 + shake} ${bLy0} Q${32 + shake} ${bLy1} ${35 + shake} ${bLy2}`,
-//     );
-//     browR.setAttribute(
-//       "d",
-//       `M${45 + shake} ${bLy0} Q${48 + shake} ${bLy1} ${51 + shake} ${bLy2}`,
-//     );
-
-//     const ry = lerp(3.5, 1.5, t3);
-//     eyeL.setAttribute("ry", ry.toFixed(2));
-//     eyeR.setAttribute("ry", ry.toFixed(2));
-//     eyeL.setAttribute("cx", (32 + shake).toFixed(1));
-//     eyeR.setAttribute("cx", (48 + shake).toFixed(1));
-//     pulL.setAttribute("cx", (33.2 + shake).toFixed(1));
-//     pulR.setAttribute("cx", (49.2 + shake).toFixed(1));
-
-//     const my = lerp(42, 44, t3);
-//     const mcy = lerp(48, 36, t3);
-//     mouth.setAttribute(
-//       "d",
-//       `M${33 + shake} ${my} Q${40 + shake} ${mcy} ${47 + shake} ${my}`,
-//     );
-
-//     chkL.setAttribute("opacity", lerp(0.5, 0, t2).toFixed(2));
-//     chkR.setAttribute("opacity", lerp(0.5, 0, t2).toFixed(2));
-
-//     const laEndY = lerp(44, 30, t3);
-//     armL.setAttribute(
-//       "d",
-//       `M24 60 Q${lerp(13, 8, t3).toFixed(1)} ${lerp(55, 45, t3).toFixed(1)} ${lerp(15, 10, t3).toFixed(1)} ${laEndY.toFixed(1)}`,
-//     );
-//     armR.setAttribute(
-//       "d",
-//       `M56 60 Q${lerp(67, 72, t3).toFixed(1)} ${lerp(55, 45, t3).toFixed(1)} ${lerp(65, 70, t3).toFixed(1)} ${laEndY.toFixed(1)}`,
-//     );
-
-//     sweat.setAttribute("opacity", clamp(t2 * 0.9 - t3 * 0.5, 0, 1).toFixed(2));
-
-//     const starOp = clamp(t3 * (0.6 + 0.4 * Math.sin(ts * 0.07)), 0, 1).toFixed(
-//       2,
-//     );
-//     star1.setAttribute("opacity", starOp);
-//     star2.setAttribute("opacity", (starOp * 0.8).toFixed(2));
-
-//     if (t3 > 0.6) svg.classList.add("shaking");
-//     else svg.classList.remove("shaking");
-
-//     let mood, text;
-//     if (angerLevel < 0.3) {
-//       mood = "idle";
-//     } else if (angerLevel < 1.6) {
-//       mood = "happy";
-//     } else if (angerLevel < 2.4) {
-//       mood = "annoyed";
-//     } else {
-//       mood = "angry";
-//     }
-
-//     if (mood !== currentMood) {
-//       currentMood = mood;
-//       label.className = mood;
-//       label.textContent = text;
-//       if (mood !== "idle") label.classList.add("visible");
-//     }
-
-//     requestAnimationFrame(frame);
-//   }
-
-//   requestAnimationFrame(frame);
-// })();
