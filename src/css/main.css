@@ -17,6 +17,17 @@ html {
   height: 100vh;
 }
 
+.undraggable {
+  user-drag: none;
+  -webkit-user-select: none; /* Safari, Chrome */
+  -webkit-user-drag: none;
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE */
+  user-select: none; /* CSS3 */
+  pointer-events: none;
+}
+
 .loading-page {
   display: flex;
   align-items: center;
@@ -111,24 +122,10 @@ html {
   cursor: none;
 }
 
-#wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 40px 20px;
-  cursor: grab;
-  user-select: none;
-}
-
-#wrap:active {
-  cursor: grabbing;
-}
-
 #scene {
   perspective: 1200px;
-  width: 560px;
-  max-width: 92vw;
+  width: 100%;
+
   height: 360px;
 }
 
@@ -180,6 +177,7 @@ html {
   cursor: pointer;
   font-family: sans-serif;
   transition: all 0.25s;
+  display: none;
 }
 
 #flipbtn:hover {
@@ -418,4 +416,63 @@ html {
   width: 100%;
   height: auto;
   z-index: 2;
+}
+
+.front-enveloppe,
+.open-enveloppe,
+.stamp,
+.background-enveloppe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  z-index: 3;
+}
+
+.open-enveloppe {
+  z-index: 3;
+  width: 90%;
+  transform: translate(-49%, -39%);
+}
+
+.stamp {
+  z-index: 4;
+  width: 30%;
+  transform: translate(-50%, 20%);
+}
+
+.background-enveloppe {
+  z-index: 2;
+  width: 101%;
+  transform: translate(-50.5%, -39%);
+}
+
+.enveloppe-container {
+  position: relative;
+  transform: translate(20%, -300%);
+  width: 40%;
+  cursor: pointer;
+  z-index: 3;
+}
+
+#wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 20px;
+  cursor: grab;
+  user-select: none;
+  width: 100%;
+  transform: translate(25%, 30%);
+}
+
+#wrap:active {
+  cursor: grabbing;
+}
+
+#card {
+  width: 50%;
+  height: 40%;
 }

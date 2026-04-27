@@ -11,73 +11,99 @@
     <div id="scroll-buddy"></div>
     <!-- Page de chargement -->
     <div class="loading-page">
-      <h2 class="first-title">Take the time to look and you will see...</h2>
+      <h2 class="first-title">Prenez le temps de regarder et vous verrez...</h2>
       <h2 class="second-title">Hayao Miysaki</h2>
       <img
         src="./images/cloud-top-left.png"
         alt="cloud"
-        class="cloud-top-left"
+        class="cloud-top-left undraggable"
       />
       <img
         src="./images/cloud-top-right.png"
         alt="cloud"
-        class="cloud-top-right"
+        class="cloud-top-right undraggable"
       />
       <img
         src="./images/cloud-bottom-left.png"
         alt="cloud"
-        class="cloud-bottom-left"
+        class="cloud-bottom-left undraggable"
       />
       <img
         src="./images/cloud-bottom-right.png"
         alt="cloud"
-        class="cloud-bottom-right"
+        class="cloud-bottom-right undraggable"
       />
     </div>
 
     <!-- Contenu de la page -->
     <div class="content">
-      <img src="./images/desk.png" alt="desk" class="desk-2" />
+      <img src="./images/desk.png" alt="desk" class="desk-2 undraggable" />
       <h1>coucou</h1>
       <div id="loupe"></div>
       <div><p>test</p></div>
       <div class="image-container">
-        <img src="./images/landscape.jpg" alt="Landscape" id="landscape" />
+        <img
+          src="./images/landscape.jpg"
+          alt="Landscape"
+          id="landscape"
+          class="undraggable"
+        />
         <img
           id="landscape-2"
           src="./images/landscape-2.png"
           alt="Landscape 2"
+          class="undraggable"
         />
       </div>
-      <div class="topEnveloppe">
-        <img src="images/front-enveloppe.png" alt="image enveloppe" />
-        <img src="images/dessus-enveloppe.png" alt="image enveloppe" />
-        <img src="images/cachet.png" alt="image enveloppe" />
-      </div>
-      <div id="wrap">
-        <div id="scene">
-          <div id="card">
-            <div class="face">
-              <img
-                id="img-recto"
-                src="./images/card-nausicaa-front.png"
-                alt="recto"
-              />
-            </div>
-            <div class="face back">
-              <img
-                id="img-verso"
-                src="./images/card-nausicaa-back.png"
-                alt="verso"
-              />
+      <!-- Enveloppe -->
+      <div class="enveloppe-container">
+        <div class="topEnveloppe">
+          <img
+            src="images/cachet.png"
+            alt="image enveloppe"
+            class="stamp undraggable"
+          />
+          <img
+            src="images/front-enveloppe.png"
+            alt="image enveloppe"
+            class="front-enveloppe undraggable"
+          />
+          <img
+            src="images/dessus-enveloppe.png"
+            alt="image enveloppe"
+            class="open-enveloppe undraggable"
+          />
+        </div>
+        <!-- Card -->
+        <div id="wrap">
+          <div id="scene">
+            <div id="card">
+              <div class="face">
+                <img
+                  id="img-recto"
+                  src="./images/card-nausicaa-front.png"
+                  alt="recto"
+                />
+              </div>
+              <div class="face back">
+                <img
+                  id="img-verso"
+                  src="./images/card-nausicaa-back.png"
+                  alt="verso"
+                />
+              </div>
             </div>
           </div>
+          <div id="hint">Glisser pour orienter · Cliquer pour retourner</div>
+          <button id="flipbtn">Retourner la carte</button>
         </div>
-        <div id="hint">Glisser pour orienter · Cliquer pour retourner</div>
-        <button id="flipbtn">Retourner la carte</button>
-      </div>
-      <div class="backgroudEnveloppe">
-        <img src="images/background-enveloppe.png" alt="image enveloppe" />
+        <div class="backgroudEnveloppe">
+          <img
+            src="images/background-enveloppe.png"
+            alt="image enveloppe"
+            class="background-enveloppe undraggable"
+          />
+        </div>
       </div>
     </div>
     <script src="js/main.js" type="module"></script>

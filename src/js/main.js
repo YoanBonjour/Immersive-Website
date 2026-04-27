@@ -35,7 +35,7 @@ var loadPromise = new Promise((resolve) => {
 });
 
 var timerPromise = new Promise((resolve) => {
-  setTimeout(resolve, 5000);
+  setTimeout(resolve, 1000); // Timer de 5 secondes pour s'assurer que l'animation de chargement est visible
 });
 
 // When both load and timer are done, transition
@@ -44,11 +44,11 @@ Promise.all([loadPromise, timerPromise]).then(() => {
   const firstTitle = loadingPage.querySelector(".first-title");
   const secondTitle = loadingPage.querySelector(".second-title");
   gsap.to(firstTitle, { opacity: 0, duration: 2 });
-  gsap.to(secondTitle, { opacity: 1, duration: 1.5, delay: 2 });
+  gsap.to(secondTitle, { opacity: 1, duration: 1.5, delay: 2 }); // Affiche le second titre après la disparition du premier
 
   // Move clouds
   var timerCloudsPromise = new Promise((resolve) => {
-    setTimeout(resolve, 4000);
+    setTimeout(resolve, 1000); // Timer de 4 secondes pour laisser le temps au second titre de s'afficher avant de faire partir les nuages
   });
   Promise.all([timerCloudsPromise]).then(() => {
     moveCloudsToCorners(loadingPage);
@@ -56,10 +56,10 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
   gsap.to(content, {
     opacity: 1,
-    duration: 4,
+    duration: 1, // Affiche le contenu progressivement pendant que les nuages partent
   });
   var timer2Promise = new Promise((resolve) => {
-    setTimeout(resolve, 7500);
+    setTimeout(resolve, 500); // Timer de 7.5 secondes pour s'assurer que les nuages ont eu le temps de partir avant de faire disparaître la page de chargement et afficher le contenu
   });
   Promise.all([timer2Promise]).then(() => {
     loadingPage.style.display = "none";
@@ -67,7 +67,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
     gsap.to(content, { opacity: 1, duration: 2 });
     gsap.to(content, {
       opacity: 1,
-      duration: 0.5,
+      duration: 0.5, // Affiche le contenu progressivement pendant que les nuages partent
     });
   });
 });
