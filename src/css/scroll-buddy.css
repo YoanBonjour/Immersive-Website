@@ -1,0 +1,48 @@
+/* ================================================
+   SCROLL BUDDY FLAME — scroll-buddy.css
+   ================================================ */
+
+#scroll-buddy {
+  position: fixed;
+  bottom: 0;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+#sb-svg {
+  width: 90px;
+  height: auto;
+  display: block;
+  will-change: transform;
+  filter: drop-shadow(0 6px 18px rgba(200, 60, 0, 0.4));
+  overflow: visible;
+  transform-origin: bottom center;
+}
+
+/* Animation de respiration / brûlure douce — toujours active */
+@keyframes sb-breathe {
+  0%   { transform: scaleX(1)     scaleY(1)     skewX(0deg);   }
+  15%  { transform: scaleX(.96)   scaleY(1.025) skewX(.4deg);  }
+  30%  { transform: scaleX(1.025) scaleY(.972)  skewX(-.3deg); }
+  50%  { transform: scaleX(.975)  scaleY(1.018) skewX(.5deg);  }
+  68%  { transform: scaleX(1.02)  scaleY(.98)   skewX(-.4deg); }
+  85%  { transform: scaleX(.97)   scaleY(1.015) skewX(.2deg);  }
+  100% { transform: scaleX(1)     scaleY(1)     skewX(0deg);   }
+}
+
+/* Tremblement de rage */
+@keyframes sb-rage {
+  0%,100% { transform: translateX(0)    rotate(0deg);    }
+  20%     { transform: translateX(-4px) rotate(-1.5deg); }
+  40%     { transform: translateX(4px)  rotate(1.5deg);  }
+  60%     { transform: translateX(-3px) rotate(-1deg);   }
+  80%     { transform: translateX(3px)  rotate(1deg);    }
+}
+
+#sb-svg.breathing { animation: sb-breathe 2.6s ease-in-out infinite; }
+#sb-svg.shaking   { animation: sb-rage    0.28s ease-in-out infinite; }
