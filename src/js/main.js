@@ -136,7 +136,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "2000px top",
             end: "4000px top",
             scrub: 0.5,
-            markers: true,
+
             onLeaveBack: () => {
               const card = document.querySelector("#card");
               const card2 = document.querySelector("#card2");
@@ -182,7 +182,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "4000px top",
             end: "6000px top",
             scrub: 0.5,
-            markers: true,
+
             onEnter: () => {
               allCards.forEach((card) => {
                 card.classList.add("card-fixed");
@@ -203,7 +203,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "4000px top",
             end: "6000px top",
             scrub: 0.5,
-            markers: true,
           },
         });
 
@@ -215,7 +214,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "4000px top",
             end: "6000px top",
             scrub: 0.5,
-            markers: true,
           },
         });
 
@@ -227,7 +225,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "4000px top",
             end: "6000px top",
             scrub: 0.5,
-            markers: true,
           },
         });
 
@@ -239,7 +236,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "4000px top",
             end: "6000px top",
             scrub: 0.5,
-            markers: true,
           },
         });
 
@@ -251,7 +247,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "4000px top",
             end: "6000px top",
             scrub: 0.5,
-            markers: true,
           },
         });
 
@@ -268,7 +263,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
               start: "4000px top",
               end: "6000px top",
               scrub: 0.5,
-              markers: true,
+
               onEnter: () => {
                 const wrapGrab = document.querySelector("#wrap");
                 wrapGrab.style.cursor = "grab";
@@ -292,7 +287,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "7000px top",
             end: "9000px top",
             scrub: 0.5,
-            markers: true,
+
             onEnter: () => {
               draggableCard = card2;
               const wrapGrab = document.querySelector("#wrap");
@@ -315,7 +310,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "9000px top",
             end: "11000px top",
             scrub: 0.5,
-            markers: true,
+
             onEnter: () => {
               draggableCard = card3;
             },
@@ -336,7 +331,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "11000px top",
             end: "13000px top",
             scrub: 0.5,
-            markers: true,
+
             onEnter: () => {
               draggableCard = card4;
             },
@@ -357,7 +352,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "13000px top",
             end: "16000px top",
             scrub: 0.5,
-            markers: true,
+
             onEnter: () => {
               draggableCard = card5;
             },
