@@ -133,7 +133,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
             start: "2000px top",
-            end: "4000px bottom",
+            end: "4000px top",
             scrub: 0.5,
             markers: true,
             onEnter: () => {
@@ -153,9 +153,15 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
         const card = document.querySelector("#card");
         const card2 = document.querySelector("#card2");
+        const card3 = document.querySelector("#card3");
+        const card4 = document.querySelector("#card4");
+        const card5 = document.querySelector("#card5");
+        const allCards = [card, card2, card3, card4, card5];
+        const wrap = document.querySelector("#wrap");
 
-        gsap.to([card, card2], {
-          transform: "translate(10%, -180%) rotateY(6deg) scale(1.4)",
+        // Animation initiale pour toutes les cartes
+        gsap.to(allCards, {
+          transform: "translate(0%, -180%) scale(1.3)",
           duration: 1,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
@@ -163,6 +169,13 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             end: "6000px top",
             scrub: 0.5,
             markers: true,
+            onEnter: () => {
+              allCards.forEach((card) => {
+                card.classList.add("card-fixed");
+                card.style.position = "fixed";
+              });
+              wrap.style.pointerEvents = "none";
+            },
           },
           immediateRender: true,
           tag: "scroll",
@@ -193,6 +206,88 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             },
           },
         );
+
+        // Animation pour faire partir card vers le bas et basculer la carte draggable
+        gsap.to(card, {
+          top: "150%",
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "6000px top",
+            end: "8000px top",
+            scrub: 0.5,
+            markers: true,
+            onEnter: () => {
+              draggableCard = card2;
+              const wrapGrab = document.querySelector("#wrap");
+              wrapGrab.style.cursor = "grab";
+            },
+            onLeaveBack: () => {
+              draggableCard = card;
+            },
+          },
+        });
+
+        // Animation pour faire partir card2 et basculer vers card3
+        gsap.to(card2, {
+          top: "150%",
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "8000px top",
+            end: "10000px top",
+            scrub: 0.5,
+            markers: true,
+            onEnter: () => {
+              draggableCard = card3;
+            },
+            onLeaveBack: () => {
+              draggableCard = card2;
+            },
+          },
+        });
+
+        // Animation pour faire partir card3 et basculer vers card4
+        gsap.to(card3, {
+          top: "150%",
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "10000px top",
+            end: "12000px top",
+            scrub: 0.5,
+            markers: true,
+            onEnter: () => {
+              draggableCard = card4;
+            },
+            onLeaveBack: () => {
+              draggableCard = card3;
+            },
+          },
+        });
+
+        // Animation pour faire partir card4 et basculer vers card5
+        gsap.to(card4, {
+          top: "150%",
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "12000px top",
+            end: "14000px top",
+            scrub: 0.5,
+            markers: true,
+            onEnter: () => {
+              draggableCard = card5;
+            },
+            onLeaveBack: () => {
+              draggableCard = card4;
+            },
+          },
+        });
 
         // Animation desk sticky
         gsap.to(deskImg, {
@@ -348,6 +443,9 @@ if (landscapeImg && landscape2Img) {
 
 const card = document.getElementById("card");
 const card2 = document.getElementById("card2");
+const card3 = document.getElementById("card3");
+const card4 = document.getElementById("card4");
+const card5 = document.getElementById("card5");
 const wrap = document.getElementById("wrap");
 const btn = document.getElementById("flipbtn");
 const hint = document.getElementById("hint");
@@ -358,9 +456,25 @@ let flipped = false;
 let dragging = false;
 let hasDragged = false;
 let sx, sy, ox, oy;
+let draggableCard = card2; // La deuxième carte est draggable initialement
 
 gsap.set(card, { rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" });
 gsap.set(card2, {
+  rotateX: rotX,
+  rotateY: rotY,
+  transformStyle: "preserve-3d",
+});
+gsap.set(card3, {
+  rotateX: rotX,
+  rotateY: rotY,
+  transformStyle: "preserve-3d",
+});
+gsap.set(card4, {
+  rotateX: rotX,
+  rotateY: rotY,
+  transformStyle: "preserve-3d",
+});
+gsap.set(card5, {
   rotateX: rotX,
   rotateY: rotY,
   transformStyle: "preserve-3d",
@@ -370,7 +484,7 @@ function flip() {
   flipped = !flipped;
   const targetY = flipped ? rotY + 180 : rotY - 180;
 
-  gsap.to([card, card2], {
+  gsap.to(draggableCard, {
     rotateY: targetY,
     rotateX: -6,
     duration: 0.85,
@@ -392,7 +506,7 @@ function onDown(cx, cy) {
   sy = cy;
   ox = rotX;
   oy = rotY;
-  gsap.killTweensOf([card, card2], { tag: "flip" });
+  gsap.killTweensOf([draggableCard], { tag: "flip" });
 }
 
 function onMove(cx, cy) {
@@ -406,7 +520,7 @@ function onMove(cx, cy) {
   rotX = Math.max(-30, Math.min(30, ox - dy * 0.25));
   rotY = oy + dx * 0.35;
 
-  gsap.set([card, card2], {
+  gsap.set(draggableCard, {
     rotateX: rotX,
     rotateY: rotY + (flipped ? 180 : 0),
   });
@@ -421,12 +535,12 @@ function onUp() {
     return;
   }
 
-  gsap.to([card, card2], {
+  gsap.to(draggableCard, {
     rotateX: -6,
     duration: 1.2,
     ease: "elastic.out(1, 0.6)",
     onUpdate: () => {
-      rotX = gsap.getProperty([card, card2], "rotateX");
+      rotX = gsap.getProperty(draggableCard, "rotateX");
     },
     tag: "flip",
   });

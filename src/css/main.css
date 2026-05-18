@@ -128,17 +128,56 @@ html {
 }
 
 #card,
-#card2 {
-  width: 100%;
-  height: 100%;
+#card2,
+#card3,
+#card4,
+#card5 {
+  width: 70%;
+  height: 48%;
   position: relative;
   transform-style: preserve-3d;
-  display: fixed;
 }
 
 #card2 {
-  rotate: 2deg;
+  rotate: 4deg;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
+
+#card3 {
+  rotate: -3deg;
+  z-index: -2;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#card4 {
+  rotate: 6deg;
+  z-index: -3;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#card5 {
+  rotate: -7deg;
+  z-index: -4;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* 
+.card-fixed {
+  position: fixed !important;
+  width: 25vw !important;
+  height: 35vh !important;
+  top: 50% !important;
+  left: 50% !important;
+  z-index: 100 !important;
+} */
 
 .face {
   position: absolute;
@@ -405,33 +444,10 @@ html {
   cursor: grabbing;
 }
 
-#card,
-#card2 {
-  width: 70%;
-  height: 48%;
-}
-
 .scrollTriggerEnveloppe {
   height: 200vh;
 }
 
 .scrollTriggerNext {
   height: 100vh;
-}
-
-.return-container {
-  position: fixed;
-  bottom: 1%;
-  left: 50%;
-  z-index: 101;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 1);
-  padding: 20px 40px;
-  border-radius: 100px;
-  pointer-events: none;
 }
