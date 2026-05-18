@@ -127,17 +127,61 @@ Promise.all([loadPromise, timerPromise]).then(() => {
         });
 
         gsap.to(topenveloppeOpen, {
-          transform: "scaleY(-1)",
+          opacity: 0,
 
           duration: 0.5,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
-            start: "1500px top",
-            end: "2000px top",
+            start: "2000px top",
+            end: "4000px bottom",
+            scrub: 0.5,
+            markers: true,
+            onEnter: () => {
+              const card = document.querySelector("#card");
+              card.style.display = "block";
+              const wrapGrab = document.querySelector("#wrap");
+              wrapGrab.style.cursor = "grab";
+            },
+            onLeaveBack: () => {
+              const card = document.querySelector("#card");
+              card.style.display = "none";
+              const wrapGrab = document.querySelector("#wrap");
+              wrapGrab.style.cursor = "default";
+            },
+          },
+        });
+
+        const card = document.querySelector("#card");
+
+        gsap.to(card, {
+          transform: "translate(10%, -190%) rotateY(6deg) scale(1.4)",
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "4000px top",
+            end: "6000px top",
             scrub: 0.5,
             markers: true,
           },
         });
+
+        gsap.fromTo(
+          enveloppeContainer,
+          { top: "50%", left: "50%", xPercent: -50, yPercent: -50 },
+          {
+            top: "150%",
+            left: "50%",
+            position: "fixed",
+            zIndex: 100,
+            scrollTrigger: {
+              trigger: ".scrollTriggerEnveloppe",
+              start: "4000px top",
+              end: "6000px top",
+              scrub: 0.5,
+              markers: true,
+            },
+          },
+        );
 
         // Animation desk sticky
         gsap.to(deskImg, {

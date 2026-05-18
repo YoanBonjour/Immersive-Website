@@ -132,6 +132,7 @@ html {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
+  display: none;
 }
 
 .face {
@@ -378,6 +379,8 @@ html {
   width: 30%;
   cursor: pointer;
   z-index: 3;
+  image-rendering: crisp-edges;
+  will-change: transform;
 }
 
 #wrap {
@@ -386,11 +389,11 @@ html {
   align-items: center;
   gap: 20px;
   padding: 40px 20px;
-  cursor: grab;
+  cursor: default;
   user-select: none;
   width: 100%;
   z-index: 5;
-  transform: translate(25%, 25%) rotate(-9deg);
+  transform: translate(20%, 25%) rotate(-9deg);
 }
 
 #wrap:active {
@@ -398,8 +401,8 @@ html {
 }
 
 #card {
-  width: 50%;
-  height: 50%;
+  width: 70%;
+  height: 48%;
 }
 
 .scrollTriggerEnveloppe {
