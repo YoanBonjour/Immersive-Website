@@ -11,6 +11,10 @@ a {
 img,
 video {
   display: block;
+  transform: scale(1) translate3d(0, 0, 0);
+  image-rendering: smooth;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
@@ -138,9 +142,17 @@ html {
   transform-style: preserve-3d;
 }
 
+#card {
+  rotate: -2deg;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #card2 {
   rotate: 4deg;
-  z-index: -1;
+  z-index: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -148,7 +160,7 @@ html {
 
 #card3 {
   rotate: -3deg;
-  z-index: -2;
+  z-index: -1;
   position: absolute;
   top: 0;
   left: 0;
@@ -156,7 +168,7 @@ html {
 
 #card4 {
   rotate: 6deg;
-  z-index: -3;
+  z-index: -2;
   position: absolute;
   top: 0;
   left: 0;
@@ -164,7 +176,7 @@ html {
 
 #card5 {
   rotate: -7deg;
-  z-index: -4;
+  z-index: -3;
   position: absolute;
   top: 0;
   left: 0;
