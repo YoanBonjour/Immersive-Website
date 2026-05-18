@@ -196,7 +196,7 @@ html {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
-  border-radius: 8px;
+  border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
 }
@@ -438,6 +438,7 @@ html {
   z-index: 3;
   image-rendering: crisp-edges;
   will-change: transform;
+  opacity: 0;
 }
 
 #wrap {

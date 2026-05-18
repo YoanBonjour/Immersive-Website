@@ -99,6 +99,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           position: "fixed",
           scale: 3,
           rotation: 6,
+          opacity: 1,
           left: "50%",
           top: "50%",
           xPercent: -50,
@@ -288,8 +289,8 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           duration: 1,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
-            start: "6000px top",
-            end: "8000px top",
+            start: "7000px top",
+            end: "9000px top",
             scrub: 0.5,
             markers: true,
             onEnter: () => {
@@ -311,8 +312,8 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           duration: 1,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
-            start: "8000px top",
-            end: "10000px top",
+            start: "9000px top",
+            end: "11000px top",
             scrub: 0.5,
             markers: true,
             onEnter: () => {
@@ -332,8 +333,8 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           duration: 1,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
-            start: "10000px top",
-            end: "12000px top",
+            start: "11000px top",
+            end: "13000px top",
             scrub: 0.5,
             markers: true,
             onEnter: () => {
@@ -353,8 +354,8 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           duration: 1,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
-            start: "12000px top",
-            end: "14000px top",
+            start: "13000px top",
+            end: "16000px top",
             scrub: 0.5,
             markers: true,
             onEnter: () => {
