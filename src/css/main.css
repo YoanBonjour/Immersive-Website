@@ -127,12 +127,17 @@ html {
   height: 25vw;
 }
 
-#card {
+#card,
+#card2 {
   width: 100%;
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  display: none;
+  display: fixed;
+}
+
+#card2 {
+  rotate: 2deg;
 }
 
 .face {
@@ -374,7 +379,7 @@ html {
 .enveloppe-container {
   position: absolute;
   /* transform: translate(150%, -380%); */
-  top: 6.9vw;
+  top: 6.8vw;
   right: 3vw;
   width: 30%;
   cursor: pointer;
@@ -400,7 +405,8 @@ html {
   cursor: grabbing;
 }
 
-#card {
+#card,
+#card2 {
   width: 70%;
   height: 48%;
 }
@@ -411,4 +417,21 @@ html {
 
 .scrollTriggerNext {
   height: 100vh;
+}
+
+.return-container {
+  position: fixed;
+  bottom: 1%;
+  left: 50%;
+  z-index: 101;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 1);
+  padding: 20px 40px;
+  border-radius: 100px;
+  pointer-events: none;
 }

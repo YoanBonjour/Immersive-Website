@@ -139,22 +139,23 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             onEnter: () => {
               const card = document.querySelector("#card");
               card.style.display = "block";
-              const wrapGrab = document.querySelector("#wrap");
-              wrapGrab.style.cursor = "grab";
+              const card2 = document.querySelector("#card");
+              card2.style.display = "block";
             },
             onLeaveBack: () => {
               const card = document.querySelector("#card");
               card.style.display = "none";
-              const wrapGrab = document.querySelector("#wrap");
-              wrapGrab.style.cursor = "default";
+              const card2 = document.querySelector("#card");
+              card2.style.display = "none";
             },
           },
         });
 
         const card = document.querySelector("#card");
+        const card2 = document.querySelector("#card2");
 
-        gsap.to(card, {
-          transform: "translate(10%, -190%) rotateY(6deg) scale(1.4)",
+        gsap.to([card, card2], {
+          transform: "translate(10%, -180%) rotateY(6deg) scale(1.4)",
           duration: 1,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
@@ -163,6 +164,8 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             scrub: 0.5,
             markers: true,
           },
+          immediateRender: true,
+          tag: "scroll",
         });
 
         gsap.fromTo(
@@ -179,6 +182,14 @@ Promise.all([loadPromise, timerPromise]).then(() => {
               end: "6000px top",
               scrub: 0.5,
               markers: true,
+              onEnter: () => {
+                const wrapGrab = document.querySelector("#wrap");
+                wrapGrab.style.cursor = "grab";
+              },
+              onLeaveBack: () => {
+                const wrapGrab = document.querySelector("#wrap");
+                wrapGrab.style.cursor = "default";
+              },
             },
           },
         );
@@ -336,6 +347,7 @@ if (landscapeImg && landscape2Img) {
 }
 
 const card = document.getElementById("card");
+const card2 = document.getElementById("card2");
 const wrap = document.getElementById("wrap");
 const btn = document.getElementById("flipbtn");
 const hint = document.getElementById("hint");
@@ -348,12 +360,17 @@ let hasDragged = false;
 let sx, sy, ox, oy;
 
 gsap.set(card, { rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" });
+gsap.set(card2, {
+  rotateX: rotX,
+  rotateY: rotY,
+  transformStyle: "preserve-3d",
+});
 
 function flip() {
   flipped = !flipped;
   const targetY = flipped ? rotY + 180 : rotY - 180;
 
-  gsap.to(card, {
+  gsap.to([card, card2], {
     rotateY: targetY,
     rotateX: -6,
     duration: 0.85,
@@ -362,6 +379,7 @@ function flip() {
       rotX = -6;
       rotY = targetY;
     },
+    tag: "flip",
   });
 
   btn.textContent = flipped ? "Voir le recto" : "Retourner la carte";
@@ -374,7 +392,7 @@ function onDown(cx, cy) {
   sy = cy;
   ox = rotX;
   oy = rotY;
-  gsap.killTweensOf(card);
+  gsap.killTweensOf([card, card2], { tag: "flip" });
 }
 
 function onMove(cx, cy) {
@@ -388,7 +406,10 @@ function onMove(cx, cy) {
   rotX = Math.max(-30, Math.min(30, ox - dy * 0.25));
   rotY = oy + dx * 0.35;
 
-  gsap.set(card, { rotateX: rotX, rotateY: rotY + (flipped ? 180 : 0) });
+  gsap.set([card, card2], {
+    rotateX: rotX,
+    rotateY: rotY + (flipped ? 180 : 0),
+  });
 }
 
 function onUp() {
@@ -400,13 +421,14 @@ function onUp() {
     return;
   }
 
-  gsap.to(card, {
+  gsap.to([card, card2], {
     rotateX: -6,
     duration: 1.2,
     ease: "elastic.out(1, 0.6)",
     onUpdate: () => {
-      rotX = gsap.getProperty(card, "rotateX");
+      rotX = gsap.getProperty([card, card2], "rotateX");
     },
+    tag: "flip",
   });
 }
 
