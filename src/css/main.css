@@ -140,6 +140,7 @@ html {
   height: 48%;
   position: relative;
   transform-style: preserve-3d;
+  display: none;
 }
 
 #card {

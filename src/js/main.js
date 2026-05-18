@@ -136,17 +136,29 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             end: "4000px top",
             scrub: 0.5,
             markers: true,
-            onEnter: () => {
-              const card = document.querySelector("#card");
-              card.style.display = "block";
-              const card2 = document.querySelector("#card");
-              card2.style.display = "block";
-            },
             onLeaveBack: () => {
               const card = document.querySelector("#card");
-              card.style.display = "none";
-              const card2 = document.querySelector("#card");
-              card2.style.display = "none";
+              const card2 = document.querySelector("#card2");
+              const card3 = document.querySelector("#card3");
+              const card4 = document.querySelector("#card4");
+              const card5 = document.querySelector("#card5");
+              gsap.to([card, card2, card3, card4, card5], {
+                display: "none",
+                opacity: 1,
+                duration: 0.5,
+              });
+            },
+            onEnter: () => {
+              const card = document.querySelector("#card");
+              const card2 = document.querySelector("#card2");
+              const card3 = document.querySelector("#card3");
+              const card4 = document.querySelector("#card4");
+              const card5 = document.querySelector("#card5");
+              gsap.to([card, card2, card3, card4, card5], {
+                display: "block",
+                opacity: 1,
+                duration: 0.5,
+              });
             },
           },
         });
@@ -163,6 +175,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
         gsap.to(allCards, {
           transform: "translate(0%, -180%) scale(1.3)",
           duration: 1,
+
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
             start: "4000px top",
@@ -179,6 +192,66 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           },
           immediateRender: true,
           tag: "scroll",
+        });
+
+        gsap.to(card, {
+          transform: "rotate(6deg)",
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "4000px top",
+            end: "6000px top",
+            scrub: 0.5,
+            markers: true,
+          },
+        });
+
+        gsap.to(card2, {
+          transform: "rotate(3deg)",
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "4000px top",
+            end: "6000px top",
+            scrub: 0.5,
+            markers: true,
+          },
+        });
+
+        gsap.to(card3, {
+          transform: "rotate(-4deg)",
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "4000px top",
+            end: "6000px top",
+            scrub: 0.5,
+            markers: true,
+          },
+        });
+
+        gsap.to(card4, {
+          transform: "rotate(5deg) scale(1.3)",
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "4000px top",
+            end: "6000px top",
+            scrub: 0.5,
+            markers: true,
+          },
+        });
+
+        gsap.to(card5, {
+          transform: "rotate(-3deg)",
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".scrollTriggerEnveloppe",
+            start: "4000px top",
+            end: "6000px top",
+            scrub: 0.5,
+            markers: true,
+          },
         });
 
         gsap.fromTo(
@@ -210,6 +283,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
         // Animation pour faire partir card vers le bas et basculer la carte draggable
         gsap.to(card, {
           top: "150%",
+          left: "50%",
           opacity: 1,
           duration: 1,
           scrollTrigger: {
@@ -232,6 +306,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
         // Animation pour faire partir card2 et basculer vers card3
         gsap.to(card2, {
           top: "150%",
+          left: "-20%",
           opacity: 1,
           duration: 1,
           scrollTrigger: {
@@ -252,6 +327,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
         // Animation pour faire partir card3 et basculer vers card4
         gsap.to(card3, {
           top: "150%",
+          left: "25%",
           opacity: 1,
           duration: 1,
           scrollTrigger: {
@@ -272,6 +348,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
         // Animation pour faire partir card4 et basculer vers card5
         gsap.to(card4, {
           top: "150%",
+          left: "-30%",
           opacity: 1,
           duration: 1,
           scrollTrigger: {
