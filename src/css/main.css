@@ -125,9 +125,8 @@ html {
   position: absolute;
   pointer-events: none;
   background-image: url("../images/landscape-2.png");
-  display: none;
   background-repeat: no-repeat;
-  background-size: 100vw 100vh;
+
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   display: none;
   z-index: 1000;
