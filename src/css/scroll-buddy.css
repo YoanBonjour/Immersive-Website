@@ -1,10 +1,10 @@
-/* ================================================
+/* ════════════════════════════════════════════════════
    SCROLL BUDDY FLAME — scroll-buddy.css
-   ================================================ */
+   ════════════════════════════════════════════════════ */
 
 #scroll-buddy {
   position: fixed;
-  bottom: 0;
+  bottom: 1rem;
   right: 2rem;
   z-index: 9999;
   display: flex;
@@ -15,34 +15,67 @@
 }
 
 #sb-svg {
-  width: 90px;
+  width: 5vw;
   height: auto;
   display: block;
-  will-change: transform;
-  filter: drop-shadow(0 6px 18px rgba(200, 60, 0, 0.4));
   overflow: visible;
-  transform-origin: bottom center;
+  transform-origin: center bottom;
 }
 
-/* Animation de respiration / brûlure douce — toujours active */
+/* Respiration douce et organique */
 @keyframes sb-breathe {
-  0%   { transform: scaleX(1)     scaleY(1)     skewX(0deg);   }
-  15%  { transform: scaleX(.96)   scaleY(1.025) skewX(.4deg);  }
-  30%  { transform: scaleX(1.025) scaleY(.972)  skewX(-.3deg); }
-  50%  { transform: scaleX(.975)  scaleY(1.018) skewX(.5deg);  }
-  68%  { transform: scaleX(1.02)  scaleY(.98)   skewX(-.4deg); }
-  85%  { transform: scaleX(.97)   scaleY(1.015) skewX(.2deg);  }
-  100% { transform: scaleX(1)     scaleY(1)     skewX(0deg);   }
+  0% {
+    transform: scaleX(1) scaleY(1) skewX(0deg);
+  }
+  15% {
+    transform: scaleX(0.96) scaleY(1.03) skewX(0.6deg);
+  }
+  30% {
+    transform: scaleX(1.03) scaleY(0.97) skewX(-0.4deg);
+  }
+  50% {
+    transform: scaleX(0.97) scaleY(1.025) skewX(0.5deg);
+  }
+  70% {
+    transform: scaleX(1.025) scaleY(0.98) skewX(-0.3deg);
+  }
+  85% {
+    transform: scaleX(0.98) scaleY(1.02) skewX(0.3deg);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1) skewX(0deg);
+  }
 }
 
-/* Tremblement de rage */
+/* Tremblement lent et progressif */
 @keyframes sb-rage {
-  0%,100% { transform: translateX(0)    rotate(0deg);    }
-  20%     { transform: translateX(-4px) rotate(-1.5deg); }
-  40%     { transform: translateX(4px)  rotate(1.5deg);  }
-  60%     { transform: translateX(-3px) rotate(-1deg);   }
-  80%     { transform: translateX(3px)  rotate(1deg);    }
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  12% {
+    transform: translateX(-4px) rotate(-1.5deg);
+  }
+  25% {
+    transform: translateX(4px) rotate(1.5deg);
+  }
+  38% {
+    transform: translateX(-3px) rotate(-1deg);
+  }
+  50% {
+    transform: translateX(3px) rotate(1deg);
+  }
+  62% {
+    transform: translateX(-2px) rotate(-0.5deg);
+  }
+  75% {
+    transform: translateX(2px) rotate(0.5deg);
+  }
 }
 
-#sb-svg.breathing { animation: sb-breathe 2.6s ease-in-out infinite; }
-#sb-svg.shaking   { animation: sb-rage    0.28s ease-in-out infinite; }
+#sb-svg.breathing {
+  animation: sb-breathe 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+#sb-svg.shaking {
+  animation: sb-rage 0.4s ease-in-out infinite;
+}

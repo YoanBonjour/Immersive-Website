@@ -19,6 +19,7 @@ video {
 
 html {
   height: 15000px;
+  /* background: #392517; */
 }
 
 .undraggable {
@@ -40,7 +41,7 @@ html {
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-image: url("../images/desk.png");
+  /* background-image: url("../images/desk.png"); */
   background-size: cover;
   background-position: center;
 }

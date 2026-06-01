@@ -267,10 +267,12 @@ Promise.all([loadPromise, timerPromise]).then(() => {
               onEnter: () => {
                 const wrapGrab = document.querySelector("#wrap");
                 wrapGrab.style.cursor = "grab";
+                wrapGrab.style.pointerEvents = "auto";
               },
               onLeaveBack: () => {
                 const wrapGrab = document.querySelector("#wrap");
                 wrapGrab.style.cursor = "default";
+                wrapGrab.style.pointerEvents = "none";
               },
             },
           },
@@ -292,6 +294,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
               draggableCard = card2;
               const wrapGrab = document.querySelector("#wrap");
               wrapGrab.style.cursor = "grab";
+              wrapGrab.style.pointerEvents = "auto";
             },
             onLeaveBack: () => {
               draggableCard = card;
@@ -313,6 +316,8 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
             onEnter: () => {
               draggableCard = card3;
+              const wrapGrab = document.querySelector("#wrap");
+              wrapGrab.style.pointerEvents = "auto";
             },
             onLeaveBack: () => {
               draggableCard = card2;
@@ -334,6 +339,8 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
             onEnter: () => {
               draggableCard = card4;
+              const wrapGrab = document.querySelector("#wrap");
+              wrapGrab.style.pointerEvents = "auto";
             },
             onLeaveBack: () => {
               draggableCard = card3;
@@ -355,6 +362,8 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
             onEnter: () => {
               draggableCard = card5;
+              const wrapGrab = document.querySelector("#wrap");
+              wrapGrab.style.pointerEvents = "auto";
             },
             onLeaveBack: () => {
               draggableCard = card4;
