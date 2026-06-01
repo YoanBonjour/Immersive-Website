@@ -38,7 +38,7 @@ var loadPromise = new Promise((resolve) => {
 });
 
 var timerPromise = new Promise((resolve) => {
-  setTimeout(resolve, 1000); // Timer de 5 secondes pour s'assurer que l'animation de chargement est visible
+  setTimeout(resolve, 5000); // Timer de 5 secondes pour s'assurer que l'animation de chargement est visible
 });
 
 // When both load and timer are done, transition
@@ -51,7 +51,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
   // Move clouds
   var timerCloudsPromise = new Promise((resolve) => {
-    setTimeout(resolve, 1000); // Timer de 4 secondes pour laisser le temps au second titre de s'afficher avant de faire partir les nuages
+    setTimeout(resolve, 5000); // Timer de 4 secondes pour laisser le temps au second titre de s'afficher avant de faire partir les nuages
   });
   Promise.all([timerCloudsPromise]).then(() => {
     moveCloudsToCorners(loadingPage);
@@ -62,11 +62,13 @@ Promise.all([loadPromise, timerPromise]).then(() => {
     duration: 1, // Affiche le contenu progressivement pendant que les nuages partent
   });
   var timer2Promise = new Promise((resolve) => {
-    setTimeout(resolve, 500); // Timer de 7.5 secondes pour s'assurer que les nuages ont eu le temps de partir avant de faire disparaître la page de chargement et afficher le contenu
+    setTimeout(resolve, 7500); // Timer de 7.5 secondes pour s'assurer que les nuages ont eu le temps de partir avant de faire disparaître la page de chargement et afficher le contenu
   });
   Promise.all([timer2Promise]).then(() => {
     loadingPage.style.display = "none";
     content.style.display = "block";
+    const html = document.querySelector("html");
+    content.style.height = "21000px";
     gsap.to(content, { opacity: 1, duration: 2 });
     gsap.to(content, {
       opacity: 1,
@@ -368,6 +370,37 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             onLeaveBack: () => {
               draggableCard = card4;
             },
+          },
+        });
+
+        ScrollTrigger.create({
+          trigger: ".scrollTriggerEnveloppe",
+          start: "16500px top", // un peu après la fin de l'animation de card4
+          onEnter: () => {
+            const trans = document.querySelector("#transition-video");
+            const desk = document.querySelector(".desk-2");
+            const enveloppe = document.querySelector(".enveloppe-container");
+            const allCards = document.querySelectorAll(".card");
+
+            trans.style.display = "block";
+            trans.style.position = "fixed";
+
+            var timertransition = new Promise((resolve) => {
+              setTimeout(resolve, 8000); // Timer de 5 secondes pour s'assurer que l'animation de chargement est visible
+            });
+            Promise.all([timertransition]).then(() => {
+              desk.style.display = "none";
+              enveloppe.style.display = "none";
+              allCards.forEach((card) => {
+                card.style.display = "none";
+              });
+            });
+          },
+
+          onLeaveBack: () => {
+            const trans = document.querySelector("#transition-video");
+
+            trans.style.display = "none";
           },
         });
 

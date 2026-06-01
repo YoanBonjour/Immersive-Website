@@ -18,7 +18,7 @@ video {
 }
 
 html {
-  height: 15000px;
+  height: 100%;
   /* background: #392517; */
 }
 
@@ -465,4 +465,16 @@ html {
 
 .scrollTriggerNext {
   height: 100vh;
+}
+
+#transition-video {
+  position: fixed;
+  top: -35;
+  left: 0;
+  width: 120%;
+  height: 120%;
+  z-index: 100000;
+  object-fit: cover;
+  display: none;
+  pointer-events: none;
 }
