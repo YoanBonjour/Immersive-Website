@@ -538,7 +538,7 @@ let flipped = false;
 let dragging = false;
 let hasDragged = false;
 let sx, sy, ox, oy;
-let draggableCard = card2; // La deuxième carte est draggable initialement
+let draggableCard = card; // La première carte est draggable initialement
 
 gsap.set(card, { rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" });
 gsap.set(card2, {
