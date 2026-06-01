@@ -432,14 +432,14 @@ html {
 .enveloppe-container {
   position: absolute;
   /* transform: translate(150%, -380%); */
-  top: 6.8vw;
+  top: 5.8vw;
   right: 3vw;
   width: 30%;
   cursor: pointer;
   z-index: 3;
   image-rendering: crisp-edges;
   will-change: transform;
-  opacity: 0;
+  opacity: 1;
 }
 
 #wrap {
