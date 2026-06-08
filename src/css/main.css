@@ -610,7 +610,7 @@ html {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  width: 20px;
+  width: 30px;
   height: auto;
   z-index: 10;
 }
@@ -656,31 +656,56 @@ html {
 }
 
 .overlay-text {
-  color: #224c18;
   text-align: center;
   font-family: "DIN Condensed";
   font-size: 24.625px;
   font-style: normal;
-  font-weight: 1 00;
+  font-weight: 700;
   line-height: 144%; /* 35.459px */
   letter-spacing: 0.246px;
 }
 
 .overlay-footer {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: "din-condensed", sans-serif;
-  font-weight: 100;
-  letter-spacing: 4px;
-  text-align: center;
-  font-size: 1rem;
+  bottom: 15px;
+  right: -25px;
+  font-family: "DIN Condensed";
+  font-size: 12.513px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 80%; /* 10.01px */
+  letter-spacing: 2.503px;
+  text-transform: uppercase;
+}
+
+.overlay-cross {
+  position: fixed;
+  top: 20px;
+  left: 500px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 .overlay-title,
 .overlay-subtitle,
 .overlay-text,
-.overlay-footer {
-  transform: translateX(10%);
+.overlay-footer,
+.overlay-cross {
+  transform: translateX(5%);
+  color: #224c18;
+}
+
+.overlay-black-background {
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: -2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.closed {
+  display: none;
 }

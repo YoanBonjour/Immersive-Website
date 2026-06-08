@@ -693,3 +693,12 @@ window.addEventListener(
 window.addEventListener("touchend", onUp);
 
 gsap.to(hint, { opacity: 0, delay: 3, duration: 1 });
+
+const overlay = document.querySelector("overlay");
+const infosTrigger = document.querySelector("infos-container");
+const crossOverlay = document.querySelector("overlay-ceoss");
+const backgroundOverlay = document.querySelector("overlay-black-background");
+
+infosTrigger.addEventListener("click", function () {
+  overlay.classList.remove("closed");
+});
