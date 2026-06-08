@@ -1,4 +1,4 @@
-// gasp
+// gsap
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -19,8 +19,6 @@ function moveCloudsToCorners(container) {
   cloudClasses.forEach((cloudClass) => {
     const cloud = container.querySelector(`.${cloudClass}`);
     if (!cloud) return;
-
-    // Ajouter la classe leaving pour déclencher l'animation CSS
     cloud.classList.add("leaving");
   });
 }
@@ -28,32 +26,27 @@ function moveCloudsToCorners(container) {
 content.style.opacity = 0;
 content.style.display = "none";
 
-// Start loading animation immediately
 gsap.to(loadingPage, { opacity: 1, duration: 4 });
 
-// Set up promises for load and minimum timer
 var loadPromise = new Promise((resolve) => {
   window.addEventListener("load", resolve);
   console.log("Page loaded");
 });
 
 var timerPromise = new Promise((resolve) => {
-  setTimeout(resolve, 5000); // Timer de 5 secondes pour s'assurer que l'animation de chargement est visible
+  setTimeout(resolve, 9000);
 });
 
-// When both load and timer are done, transition
 Promise.all([loadPromise, timerPromise]).then(() => {
-  // Change text to second title
   const firstTitle = loadingPage.querySelector(".first-title");
   const secondTitle = loadingPage.querySelector(".second-title");
   const scrollIndication = loadingPage.querySelector(".scroll-indication");
   gsap.to(firstTitle, { opacity: 0, duration: 2 });
-  gsap.to(secondTitle, { opacity: 1, duration: 1.5, delay: 2 }); // Affiche le second titre après la disparition du premier
+  gsap.to(secondTitle, { opacity: 1, duration: 1.5, delay: 2 });
   gsap.to(scrollIndication, { opacity: 1, duration: 1.5, delay: 4 });
 
-  // Move clouds
   var timerCloudsPromise = new Promise((resolve) => {
-    setTimeout(resolve, 9000); // Timer de 4 secondes pour laisser le temps au second titre de s'afficher avant de faire partir les nuages
+    setTimeout(resolve, 9000);
   });
   Promise.all([timerCloudsPromise]).then(() => {
     moveCloudsToCorners(loadingPage);
@@ -61,24 +54,33 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
   gsap.to(content, {
     opacity: 1,
-    duration: 1, // Affiche le contenu progressivement pendant que les nuages partent
+    duration: 1,
   });
+
   var timer2Promise = new Promise((resolve) => {
-    setTimeout(resolve, 11000); // Timer de 7.5 secondes pour s'assurer que les nuages ont eu le temps de partir avant de faire disparaître la page de chargement et afficher le contenu
+    setTimeout(resolve, 9000);
   });
+
   Promise.all([timer2Promise]).then(() => {
     loadingPage.style.display = "none";
     content.style.display = "block";
-    const html = document.querySelector("html");
+
     const scrollBuddy = document.querySelector("#scroll-buddy");
+
     gsap.to(scrollBuddy, { opacity: 1, duration: 2, delay: 1 });
     content.style.height = "21000px";
-    gsap.to(content, {
-      opacity: 1,
-      duration: 0.5, // Affiche le contenu progressivement pendant que les nuages partent
+
+    window.scrollTo({
+      top: 1,
+      left: 0,
+      behavior: "smooth",
     });
 
-    // Animation enveloppe au scroll + desk sticky
+    gsap.to(content, {
+      opacity: 1,
+      duration: 0.5,
+    });
+
     setTimeout(() => {
       const enveloppeContainer = document.querySelector(".enveloppe-container");
       const deskImg = document.querySelector(".desk-2");
@@ -86,20 +88,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
       const topenveloppeOpen = document.querySelector(".open-enveloppe");
 
       if (enveloppeContainer && deskImg) {
-        // Animation enveloppe centrée
-        // gsap.to(enveloppeContainer, {
-        //   position: "fixed",
-        //   top: 0,
-        //   zIndex: 1,
-        //   scrollTrigger: {
-        //     trigger: ".content",
-        //     start: "top top",
-        //     end: "bottom top",
-        //     scrub: 0.5,
-        //     markers: false,
-        //   },
-        // });
-
         gsap.to(enveloppeContainer, {
           position: "fixed",
           scale: 3,
@@ -134,14 +122,12 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
         gsap.to(topenveloppeOpen, {
           opacity: 0,
-
           duration: 0.5,
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
             start: "2000px top",
             end: "4000px top",
             scrub: 0.5,
-
             onLeaveBack: () => {
               const card = document.querySelector("#card");
               const card2 = document.querySelector("#card2");
@@ -177,17 +163,14 @@ Promise.all([loadPromise, timerPromise]).then(() => {
         const allCards = [card, card2, card3, card4, card5];
         const wrap = document.querySelector("#wrap");
 
-        // Animation initiale pour toutes les cartes
         gsap.to(allCards, {
           transform: "translate(0%, -180%) scale(1.3)",
           duration: 1,
-
           scrollTrigger: {
             trigger: ".scrollTriggerEnveloppe",
             start: "4000px top",
             end: "6000px top",
             scrub: 0.5,
-
             onEnter: () => {
               allCards.forEach((card) => {
                 card.classList.add("card-fixed");
@@ -268,7 +251,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
               start: "4000px top",
               end: "6000px top",
               scrub: 0.5,
-
               onEnter: () => {
                 const wrapGrab = document.querySelector("#wrap");
                 wrapGrab.style.cursor = "grab";
@@ -283,7 +265,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           },
         );
 
-        // Animation pour faire partir card vers le bas et basculer la carte draggable
         gsap.to(card, {
           top: "150%",
           left: "50%",
@@ -294,7 +275,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "7000px top",
             end: "9000px top",
             scrub: 0.5,
-
             onEnter: () => {
               draggableCard = card2;
               const wrapGrab = document.querySelector("#wrap");
@@ -307,7 +287,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           },
         });
 
-        // Animation pour faire partir card2 et basculer vers card3
         gsap.to(card2, {
           top: "150%",
           left: "-20%",
@@ -318,7 +297,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "9000px top",
             end: "11000px top",
             scrub: 0.5,
-
             onEnter: () => {
               draggableCard = card3;
               const wrapGrab = document.querySelector("#wrap");
@@ -330,7 +308,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           },
         });
 
-        // Animation pour faire partir card3 et basculer vers card4
         gsap.to(card3, {
           top: "150%",
           left: "25%",
@@ -341,7 +318,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "11000px top",
             end: "13000px top",
             scrub: 0.5,
-
             onEnter: () => {
               draggableCard = card4;
               const wrapGrab = document.querySelector("#wrap");
@@ -353,7 +329,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
           },
         });
 
-        // Animation pour faire partir card4 et basculer vers card5
         gsap.to(card4, {
           top: "150%",
           left: "-30%",
@@ -364,7 +339,6 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             start: "13000px top",
             end: "16000px top",
             scrub: 0.5,
-
             onEnter: () => {
               draggableCard = card5;
               const wrapGrab = document.querySelector("#wrap");
@@ -378,7 +352,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
 
         ScrollTrigger.create({
           trigger: ".scrollTriggerEnveloppe",
-          start: "16000px top", // un peu après la fin de l'animation de card4
+          start: "16000px top",
           onEnter: () => {
             const trans = document.querySelector("#transition-video");
             const desk = document.querySelector(".desk-2");
@@ -388,13 +362,15 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             const landscape2 = document.querySelector("#landscape-2");
             const loupe = document.querySelector("#loupe");
             const content = document.querySelector("content");
+            const clickToScale = document.querySelector(".click-to-scale");
 
             trans.style.display = "block";
             trans.style.position = "fixed";
 
             var timertransition = new Promise((resolve) => {
-              setTimeout(resolve, 8000); // Timer de 5 secondes pour s'assurer que l'animation de chargement est visible
+              setTimeout(resolve, 8000);
             });
+            // APRÈS
             Promise.all([timertransition]).then(() => {
               desk.style.display = "none";
               enveloppe.style.display = "none";
@@ -404,18 +380,42 @@ Promise.all([loadPromise, timerPromise]).then(() => {
               landscape1.style.display = "block";
               landscape2.style.display = "block";
               loupe.style.display = "block";
-              content.style.height = "100%";
+              clickToScale.style.opacity = 1;
+              scrollBuddy.style.opacity = 0;
+
+              var timerRestartPromise = new Promise((resolve) => {
+                setTimeout(resolve, 15000);
+              });
+              Promise.all([timerRestartPromise]).then(() => {
+                const endButton = document.querySelector(".end-button");
+                gsap.to(endButton, { opacity: 1, duration: 2 });
+                endButton.style.pointerEvents = "auto";
+                endButton.addEventListener("click", (e) => {
+                  e.preventDefault();
+                  window.location.href = window.location.href;
+                });
+              });
+
+              // Supprime toute la hauteur excessive
+              content.style.height = "100vh";
+              content.style.overflow = "hidden";
+              document.body.style.overflow = "hidden";
+              document.body.style.height = "100vh";
+              document.documentElement.style.overflow = "hidden";
+              document.documentElement.style.height = "100vh";
+
+              document.querySelector(".scrollTriggerEnveloppe").style.height =
+                "0";
+              document.querySelector(".scrollTriggerNext").style.height = "0";
+              document.querySelector(".transition").style.height = "0";
             });
           },
-
           onLeaveBack: () => {
             const trans = document.querySelector("#transition-video");
-
             trans.style.display = "none";
           },
         });
 
-        // Animation desk sticky
         gsap.to(deskImg, {
           position: "fixed",
           top: 0,
@@ -433,7 +433,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
   });
 });
 
-// Loupe effect
+// ─── Loupe effect ────────────────────────────────────────────────────────────
 const zoom = 1;
 const loupe = document.getElementById("loupe");
 const landscapeImg = document.querySelector(".image-container img:first-child");
@@ -446,6 +446,15 @@ let lastImageY = 0;
 let lastRect = null;
 let isLoupeActive = false;
 
+function getLoupeBackgroundSize() {
+  return (
+    document.documentElement.clientWidth +
+    "px " +
+    document.documentElement.clientHeight +
+    "px"
+  );
+}
+
 function updateLoupePosition() {
   if (!isLoupeActive || !lastRect) return;
 
@@ -455,8 +464,7 @@ function updateLoupePosition() {
   loupe.style.left = lastMouseX - loupeRadius + "px";
   loupe.style.top = lastMouseY - loupeRadius + "px";
 
-  // Update background position aussi
-  loupe.style.backgroundSize = lastRect.width * zoom + "px auto";
+  loupe.style.backgroundSize = getLoupeBackgroundSize();
   loupe.style.backgroundPosition =
     -lastImageX * zoom +
     loupeRadius +
@@ -465,8 +473,8 @@ function updateLoupePosition() {
     "px";
 }
 
-// Animation continue de la loupe pendant les transitions
 let animationFrameId = null;
+
 function startLoupeAnimation() {
   if (animationFrameId) cancelAnimationFrame(animationFrameId);
   const animate = () => {
@@ -483,18 +491,40 @@ function stopLoupeAnimation() {
   }
 }
 
+function handleLoupeMove(event, targetImg) {
+  const rect = targetImg.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  // clientX/clientY : coordonnées relatives au viewport (pas au document)
+  lastMouseX = event.clientX;
+  lastMouseY = event.clientY;
+  lastImageX = x;
+  lastImageY = y;
+  lastRect = rect;
+  isLoupeActive = true;
+
+  loupe.style.display = "block";
+
+  const loupeSize = loupe.offsetWidth;
+  const loupeRadius = loupeSize / 2;
+
+  loupe.style.left = event.clientX - loupeRadius + "px";
+  loupe.style.top = event.clientY - loupeRadius + "px";
+  loupe.style.backgroundSize = getLoupeBackgroundSize();
+  loupe.style.backgroundPosition =
+    -x * zoom + loupeRadius + "px " + (-y * zoom + loupeRadius) + "px";
+}
+
 // Toggle de la loupe au clic
 landscapeImg.addEventListener("click", function () {
-  console.log("Loupe clicked");
   startLoupeAnimation();
-
   gsap.to("#loupe", {
     width: "500px",
     height: "500px",
     duration: 1,
     ease: "easeInOut",
   });
-  console.log("Loupe clicked");
   setTimeout(() => {
     gsap.to("#loupe", {
       width: "200px",
@@ -503,59 +533,16 @@ landscapeImg.addEventListener("click", function () {
       ease: "easeInOut",
       onComplete: stopLoupeAnimation,
     });
-    console.log("Loupe unclicked");
   }, 2000);
 });
 
-// Effet de loupe au survol
 if (landscapeImg && landscape2Img) {
-  landscapeImg.addEventListener("mousemove", function (event) {
-    const rect = landscapeImg.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    lastMouseX = event.pageX;
-    lastMouseY = event.pageY;
-    lastImageX = x;
-    lastImageY = y;
-    lastRect = rect;
-    isLoupeActive = true;
-
-    loupe.style.display = "block";
-
-    const loupeSize = loupe.offsetWidth;
-    const loupeRadius = loupeSize / 2;
-
-    loupe.style.left = event.pageX - loupeRadius + "px";
-    loupe.style.top = event.pageY - loupeRadius + "px";
-    loupe.style.backgroundSize = rect.width * zoom + "px auto";
-    loupe.style.backgroundPosition =
-      -x * zoom + loupeRadius + "px " + (-y * zoom + loupeRadius) + "px";
-  });
-
-  landscape2Img.addEventListener("mousemove", function (event) {
-    const rect = landscape2Img.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    lastMouseX = event.pageX;
-    lastMouseY = event.pageY;
-    lastImageX = x;
-    lastImageY = y;
-    lastRect = rect;
-    isLoupeActive = true;
-
-    loupe.style.display = "block";
-
-    const loupeSize = loupe.offsetWidth;
-    const loupeRadius = loupeSize / 2;
-
-    loupe.style.left = event.pageX - loupeRadius + "px";
-    loupe.style.top = event.pageY - loupeRadius + "px";
-    loupe.style.backgroundSize = rect.width * zoom + "px auto";
-    loupe.style.backgroundPosition =
-      -x * zoom + loupeRadius + "px " + (-y * zoom + loupeRadius) + "px";
-  });
+  landscapeImg.addEventListener("mousemove", (e) =>
+    handleLoupeMove(e, landscapeImg),
+  );
+  landscape2Img.addEventListener("mousemove", (e) =>
+    handleLoupeMove(e, landscape2Img),
+  );
 
   const hideLoupe = () => {
     loupe.style.display = "none";
@@ -567,6 +554,7 @@ if (landscapeImg && landscape2Img) {
   landscape2Img.addEventListener("mouseleave", hideLoupe);
 }
 
+// ─── Cartes draggables ────────────────────────────────────────────────────────
 const card = document.getElementById("card");
 const card2 = document.getElementById("card2");
 const card3 = document.getElementById("card3");
@@ -582,7 +570,7 @@ let flipped = false;
 let dragging = false;
 let hasDragged = false;
 let sx, sy, ox, oy;
-let draggableCard = card; // La première carte est draggable initialement
+let draggableCard = card;
 
 gsap.set(card, { rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" });
 gsap.set(card2, {

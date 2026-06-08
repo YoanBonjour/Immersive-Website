@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "orange-squash";
+  src: url("../fonts/orange-squash.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "din-condensed";
+  src: url("../fonts/din-condensed.woff2") format("woff2");
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,16 +29,15 @@ video {
 
 html {
   height: 100%;
-  /* background: #392517; */
 }
 
 .undraggable {
-  -webkit-user-select: none; /* Safari, Chrome */
+  -webkit-user-select: none;
   -webkit-user-drag: none;
-  -khtml-user-select: none; /* Konqueror */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE */
-  user-select: none; /* CSS3 */
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   pointer-events: none;
 }
 
@@ -41,7 +50,6 @@ html {
   text-align: center;
   position: relative;
   overflow: hidden;
-  /* background-image: url("../images/desk.png"); */
   background-size: cover;
   background-position: center;
 }
@@ -53,7 +61,7 @@ html {
 
 .loading-page h2 {
   font-size: 3rem;
-  color: #22557B;
+  color: #345b77;
   z-index: 10;
   position: absolute;
   left: 50%;
@@ -67,10 +75,13 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: sans-serif;
+  font-family: "din-condensed", sans-serif;
+  font-weight: 700;
+  letter-spacing: 4px;
   position: fixed;
   bottom: 20px;
   transform: translateX(-50%);
+  left: 50%;
   font-size: 1rem;
   color: #333;
   z-index: 10;
@@ -142,11 +153,10 @@ html {
   height: 200px;
   border: solid 6px #fff;
   border-radius: 50%;
-  position: absolute;
+  position: fixed; /* fixed pour suivre le viewport */
   pointer-events: none;
   background-image: url("../images/landscape-2.png");
   background-repeat: no-repeat;
-
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   display: none;
   z-index: 1000;
@@ -210,15 +220,6 @@ html {
   top: 0;
   left: 0;
 }
-/* 
-.card-fixed {
-  position: fixed !important;
-  width: 25vw !important;
-  height: 35vh !important;
-  top: 50% !important;
-  left: 50% !important;
-  z-index: 100 !important;
-} */
 
 .face {
   position: absolute;
@@ -246,7 +247,7 @@ html {
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-family: sans-serif;
+  font-family: "din-condensed", sans-serif;
   display: none;
 }
 
@@ -319,7 +320,6 @@ html {
   animation: cloudFloatBottomRight 6.5s ease-in-out infinite;
 }
 
-/* Animations de départ final */
 .cloud-top-left.leaving {
   animation: cloudLeaveTopLeft 4s ease-in-out forwards !important;
 }
@@ -458,7 +458,6 @@ html {
 
 .enveloppe-container {
   position: absolute;
-  /* transform: translate(150%, -380%); */
   top: 5.8vw;
   right: 3vw;
   width: 30%;
@@ -508,4 +507,180 @@ html {
 
 #scroll-buddy {
   opacity: 0;
+}
+
+.click-to-scale {
+  opacity: 0;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "din-condensed", sans-serif;
+  font-weight: 100;
+  line-height: 80%; /* 16px */
+  letter-spacing: 4px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 1);
+  z-index: 10;
+  animation: textFloat 3s ease-in-out infinite;
+}
+
+.end-button {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  font-family: "orange-squash", sans-serif;
+  z-index: 1200;
+  padding: 0px 60px;
+  padding-top: 10px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.18),
+    0 0 24px rgba(255, 255, 255, 0.18);
+  color: white;
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.experience {
+  font-family: "orange-squash", sans-serif;
+  text-transform: uppercase;
+  font-weight: 150;
+  font-size: 5rem !important;
+  text-align: center;
+}
+
+.first-title {
+  font-family: "orange-squash", sans-serif;
+  font-weight: 300;
+}
+
+.immersive {
+  font-family: "din-condensed", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  z-index: 100000;
+  text-align: center;
+  animation: textFloat 3s ease-in-out infinite;
+  letter-spacing: 7.2px;
+  color: #345b77;
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  font-weight: 200 !important;
+}
+
+.scroll-icon {
+  align-self: center;
+}
+
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 160px;
+  height: auto;
+  z-index: 10;
+}
+
+.infos {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 20px;
+  height: auto;
+  z-index: 10;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  gap: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 40px 10px;
+  height: 100%;
+  z-index: 100000;
+}
+
+.overlay-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 100%;
+  z-index: -1;
+}
+
+.overlay-title {
+  font-family: "orange-squash", sans-serif;
+  text-transform: uppercase;
+  font-weight: 150;
+  font-size: 5rem !important;
+  text-align: center;
+}
+
+.overlay-subtitle {
+  text-align: center;
+  font-family: "din-condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 1.2rem;
+}
+
+.overlay-text {
+  color: #224c18;
+  text-align: center;
+  font-family: "DIN Condensed";
+  font-size: 24.625px;
+  font-style: normal;
+  font-weight: 1 00;
+  line-height: 144%; /* 35.459px */
+  letter-spacing: 0.246px;
+}
+
+.overlay-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "din-condensed", sans-serif;
+  font-weight: 100;
+  letter-spacing: 4px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.overlay-title,
+.overlay-subtitle,
+.overlay-text,
+.overlay-footer {
+  transform: translateX(10%);
 }
