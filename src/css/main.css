@@ -63,6 +63,26 @@ html {
   animation: textFloat 3s ease-in-out infinite;
 }
 
+.scroll-indication {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  position: fixed;
+  bottom: 20px;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: #333;
+  z-index: 10;
+  opacity: 0;
+}
+
+.scroll-indication img {
+  width: 50px;
+  bottom: 20px;
+  animation: textFloat 1s ease-in-out infinite;
+}
+
 @keyframes textFloat {
   0%,
   100% {
@@ -484,4 +504,8 @@ html {
   object-fit: cover;
   display: none;
   pointer-events: none;
+}
+
+#scroll-buddy {
+  opacity: 0;
 }

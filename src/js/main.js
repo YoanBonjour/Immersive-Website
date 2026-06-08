@@ -46,12 +46,14 @@ Promise.all([loadPromise, timerPromise]).then(() => {
   // Change text to second title
   const firstTitle = loadingPage.querySelector(".first-title");
   const secondTitle = loadingPage.querySelector(".second-title");
+  const scrollIndication = loadingPage.querySelector(".scroll-indication");
   gsap.to(firstTitle, { opacity: 0, duration: 2 });
   gsap.to(secondTitle, { opacity: 1, duration: 1.5, delay: 2 }); // Affiche le second titre après la disparition du premier
+  gsap.to(scrollIndication, { opacity: 1, duration: 1.5, delay: 4 });
 
   // Move clouds
   var timerCloudsPromise = new Promise((resolve) => {
-    setTimeout(resolve, 4000); // Timer de 4 secondes pour laisser le temps au second titre de s'afficher avant de faire partir les nuages
+    setTimeout(resolve, 9000); // Timer de 4 secondes pour laisser le temps au second titre de s'afficher avant de faire partir les nuages
   });
   Promise.all([timerCloudsPromise]).then(() => {
     moveCloudsToCorners(loadingPage);
@@ -62,14 +64,15 @@ Promise.all([loadPromise, timerPromise]).then(() => {
     duration: 1, // Affiche le contenu progressivement pendant que les nuages partent
   });
   var timer2Promise = new Promise((resolve) => {
-    setTimeout(resolve, 7500); // Timer de 7.5 secondes pour s'assurer que les nuages ont eu le temps de partir avant de faire disparaître la page de chargement et afficher le contenu
+    setTimeout(resolve, 11000); // Timer de 7.5 secondes pour s'assurer que les nuages ont eu le temps de partir avant de faire disparaître la page de chargement et afficher le contenu
   });
   Promise.all([timer2Promise]).then(() => {
     loadingPage.style.display = "none";
     content.style.display = "block";
     const html = document.querySelector("html");
+    const scrollBuddy = document.querySelector("#scroll-buddy");
+    gsap.to(scrollBuddy, { opacity: 1, duration: 2, delay: 1 });
     content.style.height = "21000px";
-    gsap.to(content, { opacity: 1, duration: 2 });
     gsap.to(content, {
       opacity: 1,
       duration: 0.5, // Affiche le contenu progressivement pendant que les nuages partent
@@ -384,6 +387,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
             const landscape1 = document.querySelector("#landscape");
             const landscape2 = document.querySelector("#landscape-2");
             const loupe = document.querySelector("#loupe");
+            const content = document.querySelector("content");
 
             trans.style.display = "block";
             trans.style.position = "fixed";
@@ -400,6 +404,7 @@ Promise.all([loadPromise, timerPromise]).then(() => {
               landscape1.style.display = "block";
               landscape2.style.display = "block";
               loupe.style.display = "block";
+              content.style.height = "100%";
             });
           },
 
